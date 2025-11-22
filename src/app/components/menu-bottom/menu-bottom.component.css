@@ -13,7 +13,7 @@ nav.bottom-nav {
   width: 100%;
   /* max-width: 900px; /* centers on large screens */ */
   margin: 0 auto;
-  /* padding: 0 12px calc(12px + env(safe-area-inset-bottom)); */
+  padding: 0 12px calc(12px + env(safe-area-inset-bottom));
   display: flex;
   justify-content: space-between;
   list-style: none;
