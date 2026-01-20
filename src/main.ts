@@ -12,6 +12,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { NgOptimizedImage } from '@angular/common';
 import { CurrencyConverterPipe } from './app/reuseables/pipes/currency-converter.pipe';
 
+import { provideIonicAngular } from '@ionic/angular/standalone';
 
 bootstrapApplication(AppComponent, {
   ...appConfig,
@@ -19,6 +20,8 @@ bootstrapApplication(AppComponent, {
     ...(appConfig.providers || []),
     provideRouter(routes),
     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
+
+  provideIonicAngular(),
 
     // ✅ Needed for NgOptimizedImage
     provideHttpClient(),

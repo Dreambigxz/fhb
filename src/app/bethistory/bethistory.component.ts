@@ -155,10 +155,10 @@ export class BethistoryComponent implements OnInit {
   }
 
   addScore(t:any){
-    console.log({t});
+    
     let score= "-:-"
 
-    if (t.fixture[0].goals.home) {
+    if (t.fixture[0].goals.home!==null) {
     score = `${t.fixture[0].goals.home}-${t.fixture[0].goals.away}`
     }
 

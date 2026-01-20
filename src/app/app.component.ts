@@ -81,4 +81,16 @@ export class AppComponent {
     // console.log('User is about to reload or close the page!');
   }
 
+  doRefresh(event: any) {
+    window.location.reload(); // Full reload
+
+    // OR soft reload data
+    // this.loadData();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
+
+
 }

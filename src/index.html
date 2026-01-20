@@ -34,6 +34,19 @@
 </head>
 <body class="mat-typography">
 
+  <div
+    class="pull-container"
+    (touchstart)="start($event)"
+    (touchmove)="move($event)"
+    (touchend)="end()">
+
+    <div class="pull-indicator" [style.height.px]="pullDistance">
+      ⬇ Pull to refresh
+    </div>
+
+    <ng-content></ng-content>
+  </div>
+
   <!-- ios install guide odal -->
   <div class="modal fade" id="iosPwaModal" tabindex="-1" aria-labelledby="iosPwaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

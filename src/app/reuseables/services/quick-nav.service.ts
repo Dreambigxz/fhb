@@ -62,4 +62,12 @@ export class QuickNavService {
   closeModal(){
     this.modal.hide()
   }
+
+  reload(url:string){
+
+    // console.log('reloading>>', {url});
+
+    this.reqServerData.get(url+'/?showSpinner').subscribe()
+
+  }
 }
