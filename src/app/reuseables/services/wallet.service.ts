@@ -43,7 +43,7 @@ export class WalletService {
   minimumPayment=0
   page:any
 
-  previewUrl='aaabbg'// string | null = null;
+  previewUrl: string | null = null;
   selectedFile: File | null = null;
   localDepositSendersName:any
   activeForm: 'Crypto' | 'Local' = 'Crypto'; // default
@@ -329,9 +329,11 @@ export class WalletService {
       const reader = new FileReader();
       reader.onload = () => {
         this.previewUrl = reader.result as string;
+
       };
       reader.readAsDataURL(this.selectedFile);
 
+      this.paymentCompleted("payment_receipt")
     }
   }
 
@@ -340,15 +342,15 @@ export class WalletService {
     formData.append('image', this.selectedFile); // key must match Django's expected field name
   }
 
-  paymentCompleted(){
+  paymentCompleted(processor='payment_completed'){
 
     const formData = new FormData();
 
     formData.append('origin', window.location.origin)
     formData.append('senders_name', this.localDepositSendersName)
     // formData.append('processor', "payment_receipt")
-    formData.append('processor', "payment_completed")
-    // this.setSelectedFile(formData)
+    formData.append('processor', processor)
+    processor==='payment_receipt'?this.setSelectedFile(formData):0;
       this.reqServerData.post("upload/",formData).subscribe(
         {
           next: res => {

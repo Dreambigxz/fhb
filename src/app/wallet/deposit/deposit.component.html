@@ -129,7 +129,7 @@
                     </button>
                 </span>
                 <span *ngIf="storeData.store['local_banks']&&!storeData.store['local_banks'][0].automatic&&!storeData.store['deposit'][0].proof&&storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else paymentProofText" class="color">
-                    Deposit to our verified bank account and click on the payment completed button.
+                    Deposit to our verified bank account and {{storeData.store['local_banks'][0].currency==='NGN'?'click on the payment completed button.':'upload the payment receipt.'}}
                     <!-- upload receipt completed to upload your proof. -->
                 </span>
                 <ng-template #paymentProofText >
@@ -146,25 +146,70 @@
 
                 <div *ngIf="storeData.store['local_banks']&&!storeData.store['local_banks'][0].automatic">
 
-                  <div *ngIf="storeData.store['local_banks'] as bank">
+                  <div *ngIf="storeData.store['local_banks'] as banks">
 
                     <div *ngIf="!storeData.store['deposit'][0].proof&&storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else awaitingpaymentConfirmationBlock">
-                      <ul  class="item-flex-list-break">
-                      <!-- <ul *ngIf="!storeData.store['deposit'][0].proof||storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else awaitingpaymentConfirmationBlock" class="item-flex-list-break"> -->
-                        <li><span class="text-first">Account No:</span>
-                          <span class="">
-                            <button (click)="walletService.copyContent(bank[0].account_number)" class="copy-btn btn btn-sm btn-outline-primary text" >
-                              <i class="ti ti-copy"></i> Copy
-                            </button><br>
-                            {{ bank[0].account_number }}
-                          </span>
-                        </li>
-                        <li><span class="text-first">Bank Name:</span> <span>{{ bank[0].bank }}</span></li>
 
-                        <li><span class="text-first">Account Name:</span> <span>{{ bank[0].account_holder }}</span></li>
-                      </ul>
 
-                      <button (click)="walletService.sendSendersName=true" style="font-size: 10px;" class="cmn-btn btn-sm text-center payment-completed" type="button" name="button">Payment completed</button>
+                      <div class="widget has-shadow">
+                          <div class="widget-body">
+
+                            <ul class="nav nav-pills mb-3" role="tablist">
+                              <li
+                                class="nav-item"
+                                role="presentation"
+                                *ngFor="let bank of banks; let i = index"
+                              >
+                                <button
+                                  class="nav-link"
+                                  [class.active]="i === 0"
+                                  id="pills-{{ bank.bank }}-tab"
+                                  data-bs-toggle="pill"
+                                  [attr.data-bs-target]="'#pills-' + bank.bank"
+                                  type="button"
+                                  role="tab"
+                                  [attr.aria-selected]="i === 0"
+                                >
+                                  {{ bank.bank }}
+                                </button>
+                              </li>
+                            </ul>
+
+                            <!-- 🔹 Tab Content -->
+                            <div class="tab-content">
+                              <div
+                                class="tab-pane fade"
+                                *ngFor="let bank of banks; let i = index"
+                                [class.show]="i === 0"
+                                [class.active]="i === 0"
+                                id="pills-{{ bank.bank }}"
+                                role="tabpanel"
+                              >
+                                <!-- Bank Content -->
+                                <!-- <p><strong>Bank:</strong> {{ bank.bank }}</p>
+                                <p><strong>Account:</strong> {{ bank.account_number }}</p> -->
+
+                                <ul  class="item-flex-list">
+                                  <li><span class="text-first">{{bank.currency==='AOA'?'IBAN':'Account Number:'}}</span>
+                                    <span class="">
+                                      <button (click)="walletService.copyContent(bank.account_number)" class="copy-btn btn btn-sm btn-outline-primary text" >
+                                        <i class="ti ti-copy"></i> Copy
+                                      </button><br>
+                                      {{ bank.account_number }}
+                                    </span>
+                                  </li>
+                                  <li><span class="text-first">Account Name</span> <span>{{ bank.account_holder }}</span></li>
+                                  <li><span class="text-first">Bank Name:</span> <span>{{ bank.bank }}</span></li>
+
+                                </ul>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <br>
+
+                      <button *ngIf="storeData.store['local_banks'][0].currency==='NGN'" (click)="walletService.sendSendersName=true" style="font-size: 10px;" class="cmn-btn btn-sm text-center payment-completed" type="button" name="button">Payment completed</button>
                     </div>
 
                   </div>
@@ -174,7 +219,7 @@
 
 
                   <ng-template #awaitingpaymentConfirmationBlock>
-                    <ul *ngIf="storeData.store['deposit'][0] as deposit" class="item-flex-list-break">
+                    <ul *ngIf="storeData.store['deposit'][0] as deposit" class="item-flex-list">
                       <li><span class="text-first">Amount:</span> <span>{{ deposit.amount|currencyConverter:true:storeData.store['deposit'][0].method }}</span></li>
                       <li><span class="text-first">Created at:</span><span>{{deposit.timestamp|timeFormat:"fullDate"}}</span></li>
                       <li><span class="text-first">Confirming:</span> <span class="text-deem"> {{deposit.timestamp|countdown:3|async}} </span></li>
@@ -183,8 +228,8 @@
 
 
 
-                  <div class="upload-wrapper mb-3 mt-5 text-center ">
-                    <div class="hide">
+                  <div *ngIf="storeData.store['local_banks'][0].currency!=='NGN';else attachSendersNameBlock" class="upload-wrapper mb-3 mt-5 text-center ">
+                    <div class="">
                       <label for="fileInput">
                         <img [src]="walletService.previewUrl || defaultImage" class="upload-preview" alt="Upload image" />
                       </label>
@@ -199,7 +244,7 @@
 
                     </div>
 
-                    <h6 class="text-deem" style="display:flex;justify-content:center" *ngIf="!walletService.previewUrl;else attachSendersNameBlock">Upload Receipt</h6>
+                    <h6 *ngIf="!walletService.previewUrl" class="text-deem" style="display:flex;justify-content:center" >Upload Receipt</h6>
 
                   </div>
 
