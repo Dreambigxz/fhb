@@ -109,9 +109,9 @@
                 </span>
               </div>
 
-							<div class=" d-flex flex justify-content-between">
+							<div *ngIf='tra.proof' class=" d-flex flex justify-content-between">
                 <span class="label">🧾Receipt:</span>
-                <span (click)="openPreview()" class="value ">Open</span>
+                <span (click)="openPreview(tra)" class="value ">Open</span>
               </div>
 
 
@@ -143,7 +143,7 @@
                 <!-- Modal Overlay -->
                 <div class="modal-backdrop" *ngIf="previewVisible" (click)="closePreview()">
                   <div class="modal-content" (click)="$event.stopPropagation()">
-                    <img [src]="tra.proof" alt="Full Proof" />
+                    <img [src]="currentProof" alt="Full Proof" />
                     <button class="close-button" (click)="closePreview()">✖</button>
                   </div>
                 </div>

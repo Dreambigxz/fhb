@@ -59,6 +59,8 @@ export class PaymentConfirmationComponent {
   previewVisible = false;
   transaction:any
 
+  currentProof:any
+
   username:any = 'nouser'
 
   ngOnInit():void{
@@ -129,7 +131,8 @@ export class PaymentConfirmationComponent {
     return data[type]
   }
 
-  openPreview() {
+  openPreview(tra:any) {
+    this.currentProof=tra.proof
     this.previewVisible = true;
   }
 
