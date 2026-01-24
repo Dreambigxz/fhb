@@ -156,7 +156,7 @@ export class MatchService {
     this.possibleWin  = parseFloat(this.stakeAmount) + parseFloat(totalProfit)
   }
 
-  toFixedNoRound(num:any, decimals:any) {
+  toFixedNoRound(num:any, decimals: any) {
     const factor = Math.pow(10, decimals);
     return (Math.trunc(num * factor) / factor).toFixed(decimals);
   }

@@ -1,4 +1,4 @@
-FF6A02
+d97f02
 
 1a1b1f -black fade
 
@@ -14,6 +14,11 @@ deem - #2a3b47
  main - 06131d
 
  secondary -  linear-gradient(135deg, #06131d, #0b2438)
+
+linear-gradient(135deg, #d97f02, #0b2030)
+
+
+ secondary-  d97f02
 
 icons - 0095ff
 

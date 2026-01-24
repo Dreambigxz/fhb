@@ -10,6 +10,11 @@ import { StoreDataService } from '../http-loader/store-data.service'; // ✅ adj
 export class CurrencyConverterPipe implements PipeTransform {
   private storeData = inject(StoreDataService);
 
+  toFixedNoRound(num:any, decimals: any) {
+    const factor = Math.pow(10, decimals);
+    return (Math.trunc(num * factor) / factor).toFixed(decimals);
+  }
+
   transform(amount: number=0, showSymbol: boolean = false, another_currency=false,minimumFractionDigits:number=2): string {
 
     const wallet = this.storeData.get('wallet');
@@ -30,6 +35,6 @@ export class CurrencyConverterPipe implements PipeTransform {
     }
     return showSymbol
       ? `${symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-      : converted.toFixed(minimumFractionDigits);
+      : this.toFixedNoRound(converted,minimumFractionDigits)//converted.toFixed(minimumFractionDigits);
   }
 }
