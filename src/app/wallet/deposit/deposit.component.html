@@ -121,13 +121,13 @@
               </div>
               <div  class="alert alert-info  d-flex align-items-center gap-2 mt-5" role="alert">
                 <i class="ti ti-alert-triangle fs-5 text-warning"></i>
-                <span *ngIf="storeData.store['local_banks']&&storeData.store['local_banks'][0].automatic" class="color">
+                <!-- <span *ngIf="storeData.store['local_banks']&&storeData.store['local_banks'][0].automatic" class="color">
                     Click the Payment Page link below to complete your payment!
                     <br>
                     <button (click)="goToPaymentPage(storeData.store['deposit'][0])" class="btn btn" type="button" name="button">
                       Payment Page <i class="ti ti-arrow-right"></i>
                     </button>
-                </span>
+                </span> -->
                 <span *ngIf="storeData.store['local_banks']&&!storeData.store['local_banks'][0].automatic&&!storeData.store['deposit'][0].proof&&storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else paymentProofText" class="color">
                     Deposit to our verified bank account and {{storeData.store['local_banks'][0].currency==='NGN'?'click on the payment completed button.':'upload the payment receipt.'}}
                     <!-- upload receipt completed to upload your proof. -->
