@@ -109,7 +109,7 @@
                                   <li><a >Rebate Commisson <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.rebate.generation_1.amount)|number:(ref.rebate.generation_1.amount < 0.01  && ref.rebate.generation_1.amount !==0 ? '1.4-4' : '1.2-2')}}</span></a></li>
                                   <li><a >Refferral Commisson <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.referral.generation_1.amount)|number:'1.2-2'}}</span></a></li>
                                   <li><a >Deposited <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.deposit.generation_1.amount)|number:'1.2-2'}}</span></a></li>
-                                  <li><a >withdrawn <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.withdraw.generation_1.amount)|number:'1.2-2'}}</span></a></li>
+                                  <!-- <li><a >withdrawn <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.withdraw.generation_1.amount)|number:'1.2-2'}}</span></a></li> -->
                               </ul>
                               <span (click)="quickNav.go('/promotions/users/1')" class="btn btn-outline-dark btn-sm text-primary">Show users <i class="fa fa-users"></i></span>
                           </div>
@@ -125,7 +125,7 @@
 
                                 <li><a >Refferral Commisson <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.referral.generation_2.amount)|number:'1.1-1'}}</span></a></li>
                                 <li><a >Deposited <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.deposit.generation_2.amount)|number:'1.1-1'}}</span></a></li>
-                                <li><a >withdrawn <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.withdraw.generation_2.amount)|number:'1.1-1'}}</span></a></li>
+                                <!-- <li><a >withdrawn <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.withdraw.generation_2.amount)|number:'1.1-1'}}</span></a></li> -->
                             </ul>
                             <span (click)="quickNav.go('/promotions/users/2')" class="btn btn-outline-dark btn-sm text-primary">Show users <i class="fa fa-users"></i></span>
 
@@ -141,7 +141,7 @@
                                   <li><a >Rebate Commisson <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.rebate.generation_3.amount)|number:(ref.rebate.generation_3.amount < 0.01 && ref.rebate.generation_3.amount !==0 ? '1.4-4' : '1.2-2')}}</span></a></li>
                                   <li><a >Refferral Commisson <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.referral.generation_3.amount)|number:'1.1-1'}}</span></a></li>
                                   <li><a >Deposited <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.deposit.generation_3.amount)|number:'1.1-1'}}</span></a></li>
-                                  <li><a >withdrawn <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.withdraw.generation_3.amount)|number:'1.1-1'}}</span></a></li>
+                                  <!-- <li><a >withdrawn <span class="text">{{walletData['init_currency']['symbol']}}{{currencyConverter(ref.withdraw.generation_3.amount)|number:'1.1-1'}}</span></a></li> -->
                               </ul>
                               <span (click)="quickNav.go('/promotions/users/3')" class="btn btn-outline-dark btn-sm text-primary">Show users <i class="fa fa-users"></i></span>
 
