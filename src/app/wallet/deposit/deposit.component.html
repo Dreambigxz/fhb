@@ -128,7 +128,7 @@
                       Payment Page <i class="ti ti-arrow-right"></i>
                     </button>
                 </span> -->
-                <span *ngIf="storeData.store['local_banks']&&!storeData.store['local_banks'][0].automatic&&!storeData.store['deposit'][0].proof&&storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else paymentProofText" class="color">
+                <span *ngIf="storeData.store['local_banks']&&storeData.store['deposit'][0].proof&&storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else paymentProofText" class="color">
                     Deposit to our verified bank account and {{storeData.store['local_banks'][0].currency==='NGN'?'click on the payment completed button.':'upload the payment receipt.'}}
                     <!-- upload receipt completed to upload your proof. -->
                 </span>
@@ -144,7 +144,7 @@
               </div>
 
 
-                <div *ngIf="storeData.store['local_banks']&&!storeData.store['local_banks'][0].automatic">
+                <div *ngIf="storeData.store['local_banks']">
 
                   <div *ngIf="storeData.store['local_banks'] as banks">
 
@@ -209,7 +209,7 @@
                         </div>
                         <br>
 
-                      <button *ngIf="storeData.store['local_banks'][0].currency==='NGN'" (click)="walletService.sendSendersName=true" style="font-size: 10px;" class="cmn-btn btn-sm text-center payment-completed" type="button" name="button">Payment completed</button>
+                      <button *ngIf="storeData.store['local_banks'][0]?.currency==='NGN'" (click)="walletService.sendSendersName=true" style="font-size: 10px;" class="cmn-btn btn-sm text-center payment-completed" type="button" name="button">Payment completed</button>
                     </div>
 
                   </div>
@@ -228,7 +228,7 @@
 
 
 
-                  <div *ngIf="storeData.store['local_banks'][0].currency!=='NGN';else attachSendersNameBlock" class="upload-wrapper mb-3 mt-5 text-center ">
+                  <div *ngIf="storeData.store['local_banks'][0]?.currency!=='NGN';else attachSendersNameBlock" class="upload-wrapper mb-3 mt-5 text-center ">
                     <div class="">
                       <label for="fileInput">
                         <img [src]="walletService.previewUrl || defaultImage" class="upload-preview" alt="Upload image" />
