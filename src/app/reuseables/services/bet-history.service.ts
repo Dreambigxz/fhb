@@ -23,7 +23,7 @@ export class BetHistoryService {
    * Get bet history filtered by status.
    * @param status - could be 'open', 'settled', 'won', 'lost', etc.
    */
-  async getHistory(status: string='all',newBet=false): Promise<any[]> {
+  async getHistory_old(status: string='all',newBet=false): Promise<any[]> {
     // ✅ If already loaded, no need to refetch
     if (this.allBets.length||newBet) {
       this.allBets = this.storeData.get('betDir')?.ticket || [ ]
@@ -42,6 +42,28 @@ export class BetHistoryService {
       return [];
     }
   }
+
+
+  async getHistory(status: string='all', newBet=false): Promise<any[]> {
+
+    if (this.allBets.length || newBet) {
+      this.allBets = this.storeData.get('betDir')?.ticket || [];
+      this.sortTickets(); // 👈 always sort
+      return this.filterBets(status);
+    }
+
+    try {
+      const res: any = await this.reqServerData.get('bet/?showSpinner').toPromise();
+      this.allBets = res?.main?.betDir?.ticket || [];
+      this.sortTickets(); // 👈 sort after fetch
+      return this.filterBets(status);
+
+    } catch (err) {
+      console.error('Error fetching bet history:', err);
+      return [];
+    }
+  }
+
 
   private filterBets(status: string,allBets:any=null) {
 
@@ -76,7 +98,7 @@ export class BetHistoryService {
 
   }
 
-  sortTickets() {
+  sortTickets_old() {
     const order = ['open', 'won', 'lost'];
 
     this.allBets = [...this.allBets]
@@ -90,6 +112,24 @@ export class BetHistoryService {
         const aRank = aIndex === -1 ? 999 : aIndex;
         const bRank = bIndex === -1 ? 999 : bIndex;
 
+        return aRank - bRank;
+      });
+  }
+
+  sortTickets() {
+    const priority: Record<string, number> = {
+      open: 0,
+      lost: 1,
+      loss: 1, // support both spellings
+      won: 2,
+      cancel: 3
+    };
+
+    this.allBets = this.allBets
+      .filter(t => t.status !== 'closed') // remove closed
+      .sort((a, b) => {
+        const aRank = priority[a.status] ?? 999;
+        const bRank = priority[b.status] ?? 999;
         return aRank - bRank;
       });
   }
