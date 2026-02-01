@@ -127,48 +127,71 @@
                 />
               </div>
 
-              <div *ngIf="walletService.paymentMode(storeData.store['savedMethod']||walletService.selectedMode)==='crypto';else localBankDetailsBlock" class="crypto">
-                <div class="input-container">
-                  <label>Address</label>
+              <div *ngIf="storeData.store['wallet']?.saved_add; else NosavedAdd" class="mb-3">
+                <label>Select saved withdrawal</label>
 
-                  <input
-                    type="text"
-                    placeholder=" Wallet Address"
-                    class="n11-bg mb-3"
-                    formControlName="account_number"
-                  />
-                </div>
+                <select
+                  class="n11-bg"
+                  formControlName="saved_method_id"
+                  (change)="walletService.onSavedMethodSelect($event)"
+                >
+                  <option value="">Select</option>
+                  <option
+                    *ngFor="let m of storeData.store['wallet'].saved_add;let i = index"
+                    [value]="i"
+                  >
+                    {{  m.account_number }}
+                  </option>
+                </select>
               </div>
 
-              <ng-template #localBankDetailsBlock>
-                <div class="input-container">
-                  <label>Account number</label>
-                  <input
-                    type="text"
-                    placeholder=" Account number"
-                    class="n11-bg mb-3"
-                    formControlName="account_number"
-                  />
+              <ng-template #NosavedAdd>
+                <div *ngIf="walletService.paymentMode(storeData.store['savedMethod']||walletService.selectedMode)==='crypto';else localBankDetailsBlock" class="crypto">
+                  <div class="input-container">
+                    <label>Address</label>
+
+                    <input
+                      type="text"
+                      placeholder=" Wallet Address"
+                      class="n11-bg mb-3"
+                      formControlName="account_number"
+                    />
+                  </div>
                 </div>
-                <div class="input-container">
-                  <label>Account name</label>
-                  <input
-                    type="text"
-                    placeholder=" Account Name"
-                    class="n11-bg mb-3"
-                    formControlName="account_holder"
-                  />
-                </div>
-                <div class="input-container">
-                  <label>Bank</label>
-                  <input
-                    type="text"
-                    placeholder=" Bank name"
-                    class="n11-bg mb-3"
-                    formControlName="bank"
-                  />
-                </div>
+
+                <ng-template #localBankDetailsBlock>
+                  <div class="input-container">
+                    <label>Account number</label>
+                    <input
+                      type="text"
+                      placeholder=" Account number"
+                      class="n11-bg mb-3"
+                      formControlName="account_number"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label>Account name</label>
+                    <input
+                      type="text"
+                      placeholder=" Account Name"
+                      class="n11-bg mb-3"
+                      formControlName="account_holder"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label>Bank</label>
+                    <input
+                      type="text"
+                      placeholder=" Bank name"
+                      class="n11-bg mb-3"
+                      formControlName="bank"
+                    />
+                  </div>
+                </ng-template>
+
               </ng-template>
+
+
 
               <div class="input-container otp-container">
                   <label>Pin</label>

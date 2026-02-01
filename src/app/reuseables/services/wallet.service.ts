@@ -52,16 +52,18 @@ export class WalletService {
   SelectedBank:any;
 
   selectedMode: PaymentMethod = 'USD';
+
   methodView: Record<PaymentMethodGrp, any> = {
     'Crypto':{
       'form':this.fb.group({
         payment_method: ['', [Validators.required]],
-        amount: ['', [Validators.required, Validators.min]],
+        amount: ['', [Validators.required, Validators.min(1)]],
         account_number: ['', [Validators.required]],
         account_holder: [''],
         bank: [''],
         verification_code: ['', [Validators.required]],
         origin:[""],
+        saved_method_id: ['']
 
       }),
       step:1
@@ -75,6 +77,7 @@ export class WalletService {
         bank: ['', [Validators.required]],
         verification_code: ['', [Validators.required]],
         origin:[""],
+        saved_method_id: ['']
       }),
       step:1
 
@@ -414,5 +417,30 @@ export class WalletService {
       }
     }, 1000);
   }
+
+  onSavedMethodSelect(event: Event) {
+    const id = (event.target as HTMLSelectElement).value;
+    const method = this.storeData.store['wallet']['saved_add'][id]
+      // .find((m: any) => m.id == id);
+
+      // console.log(meth);
+
+
+
+    if (!method) return;
+
+    const form = this.methodView[this.activeForm].form;
+
+    form.patchValue({
+      account_number: method.account_number,
+      account_holder: method.account_holder || '',
+      bank: method.bank || '',
+
+      saved_method_id:id
+      // payment_method: method.payment_method,
+      // origin: 'saved'
+    });
+  }
+
 
 }
