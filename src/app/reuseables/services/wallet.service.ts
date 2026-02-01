@@ -116,6 +116,7 @@ export class WalletService {
 
   dropdownOpen = false;
   sendSendersName=false
+  init_payment_method:any
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -156,15 +157,20 @@ export class WalletService {
     this.onCryptoSelect(crypto.value);
     this.dropdownOpen = false;
     form.patchValue({ payment_method: crypto.value });
+    this.init_payment_method = crypto.value
   }
+
   selectLocal(local:any,form:any){
+
+    console.log({local});
+
     // this.onCryptoSelect(crypto.value);
     this.SelectedBank=local.name
     this.dropdownOpen = false;
 
     this.setSelectedCurrency(local.code.toUpperCase())
-    form.patchValue({ payment_method: local.code });
 
+    this.init_payment_method = local.code
 
   }
 
@@ -279,7 +285,10 @@ export class WalletService {
 
   handleSubmit(form:any,processor:any){
 
-    // console.log({processor});
+    try {
+      form.patchValue({ payment_method: this.init_payment_method });
+
+    } catch (e) {}
 
     this.formHandler.submitForm(form, processor, 'wallet/?showSpinner', true,  (res) => {
       if (res.payment_link) {
