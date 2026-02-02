@@ -158,6 +158,8 @@ export class WalletService {
     this.dropdownOpen = false;
     form.patchValue({ payment_method: crypto.value });
     this.init_payment_method = crypto.value
+
+    this.unvalidateForm(form)
   }
 
   selectLocal(local:any,form:any){
@@ -172,6 +174,8 @@ export class WalletService {
 
     this.init_payment_method = local.code
 
+    this.unvalidateForm(form)
+
   }
 
   constructor(private router: Router) {
@@ -184,6 +188,32 @@ export class WalletService {
         }
 
       });
+  }
+
+  unvalidateForm(forms:any){
+
+      const form = this.methodView[this.activeForm]?.form;
+
+      const amount = form.get('amount')
+      const account_number = form.get('account_number')
+      const pin = form.get("verification_code")
+
+      // console.log("unvalidating>>", {account_number,amount,form});
+      amount?.setValidators([Validators.required, Validators.min(1)]);
+
+      if (!this.storeData.get('wallet')?.saved_add) {
+        // console.log('clearing amount validators >><<');
+
+        amount?.clearValidators();
+        amount?.setErrors(null);
+      }else{
+
+        pin.clearValidators();
+        pin?.setErrors(null);
+        // amount.clearValidators()
+      }
+
+
   }
 
   /** Initialize the user's payment method from localStorage or default */
@@ -228,7 +258,9 @@ export class WalletService {
     this.setSelectedCurrency(method)
 
     if (this.page==='withdraw') {
-      if (mode==="BANK") {this.activeForm="Local"}else{this.activeForm="Crypto"}
+      if (mode==="BANK") {
+        this.activeForm="Local"
+      }else{this.activeForm="Crypto"}
       this.methodView[this.activeForm].form.patchValue({payment_method:method})
     }else{
       this.formView['deposit'].patchValue({payment_method:method});
@@ -301,6 +333,8 @@ export class WalletService {
         this.quickNav.closeModal()
         !this.initialized_currency?this.quickNav.openModal("selectPaymentMethod"):0
         // this.quickNav.openModal("selectPaymentMethod")
+      }if (processor==='create_withdraw') {
+        this.unvalidateForm(form)
       }
 
 
@@ -449,6 +483,8 @@ export class WalletService {
       // payment_method: method.payment_method,
       // origin: 'saved'
     });
+
+
   }
 
 

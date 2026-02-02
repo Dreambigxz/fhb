@@ -61,6 +61,7 @@
               </select>
             </div> -->
 
+            <h4 *ngIf="!storeData.store['wallet']?.saved_add" class="text-center mb-10">Add Withdrawal info </h4>
 
             <div *ngIf="walletService.selectedMode === 'BANK';else selectCryptoForm" class="mb-3">
               <!-- <label>Select Chain</label> -->
@@ -115,7 +116,7 @@
 
             <div *ngIf="walletService.selectedMode==='BANK'&& walletService.selectedCurrency||['USD','TRON'].includes(walletService.selectedMode)" class="withdraw-info">
 
-              <div class="input-container">
+              <div *ngIf="storeData.store['wallet']?.saved_add"  class="input-container">
                 <label>Amount</label>
                 <input
                   type="number"
@@ -193,7 +194,7 @@
 
 
 
-              <div class="input-container otp-container">
+              <div *ngIf="!storeData.store['wallet']?.saved_add"  class="input-container otp-container">
                   <label>Pin</label>
 
                   <div class="otp-input-wrapper otp-row">

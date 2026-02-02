@@ -54,8 +54,6 @@ export class WithdrawComponent {
       if (!this.storeData.get('withdraw')) {
         this.reqServerData.get('wallet?dir=start_withdraw').subscribe((res)=>{
 
-          console.log({res});
-
           let hasPaymentMethod = this.walletService.setPaymentMode("", "", true);
           if(!this.storeData.get('hasPin')&&!this.walletService.initialized_currency){
             this.quickNav.openModal("setTransactionPin")
