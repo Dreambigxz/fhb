@@ -18,10 +18,8 @@ export class BetHistoryService {
   allBets: any[] = []; // keep your fetched bets here
   openBetDisplay:any
   emptyDataUrl = 'assets/images/empty-box.png'
-
-
-
- /**
+ 
+  /**
    * Get bet history filtered by status.
    * @param status - could be 'open', 'settled', 'won', 'lost', etc.
    */
@@ -45,8 +43,9 @@ export class BetHistoryService {
     }
   }
 
+
   async getHistory_(status: string='all', newBet=false): Promise<any[]> {
-    (status: string='all', newBet=false): Promise<any[]> {
+
     if (this.allBets.length || newBet) {
       this.allBets = this.storeData.get('betDir')?.ticket || [];
       this.sortTickets(); // 👈 always sort
