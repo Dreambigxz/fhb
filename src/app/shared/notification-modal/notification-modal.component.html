@@ -1,0 +1,21 @@
+<h2 mat-dialog-title class="title">
+  🔔 New Notifications
+</h2>
+
+<mat-dialog-content class="content">
+  <div *ngIf="notifications.length; else empty">
+    <div class="notification-card" *ngFor="let note of notifications">
+      <h4>{{ note.title }}</h4>
+      <p>{{ note.message }}</p>
+      <small>{{ note.date | date:'short' }}</small>
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <p class="empty">No new notifications</p>
+  </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

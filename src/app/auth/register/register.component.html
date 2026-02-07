@@ -1,0 +1,68 @@
+<app-spinner></app-spinner>
+
+<section class="login_section pt-120 p3-bg">
+    <div class="container-fluid">
+        <div class="row justify-content-between align-items-center">
+
+            <div class="col-lg-12 col-xl-12">
+                <div class="login_section__loginarea">
+                    <div class="row justify-content-start">
+                        <div class="col-xxl-10">
+                            <div class="pb-10 pt-8 mb-7 mt-12 mt-lg-0 px-4 px-sm-10">
+                              <div class="auth-logo">
+                                <img style="width:25%" class="logo" src="/assets/images/logo.png" alt="">
+                              </div>
+                                <!-- <h3 class="mb-6 mb-md-8">Create Portal</h3> -->
+                                <p class="mb-10 mb-md-15"></p>
+                                <div *ngIf="authService.formView['register'] as form" class="login_section__form section-card mb-6">
+                                  <div id="google_translate_element" class="custom-google-select text-warning"></div>
+
+                                    <form [formGroup]="form" (ngSubmit)="authService.onSubmit(form,'register')">
+                                      <div *ngIf="authService.RefCode" class="mb-5 mb-md-6 text-end">
+                                          <div class="icon text-main">
+                                              <svg class="svg-inline--fa fa-users fa-w-20" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="users" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"></path></svg>
+                                              <!-- <i class="fa fa-users"></i> Font Awesome fontawesome.com -->
+                                          </div>
+                                           <!-- <p>  Invited by  {{authService.invitedBy}}</p> -->
+                                          <p class="text-main">  Invited by {{authService.invitedBy}}</p>
+
+                                      </div>
+
+                                        <div class="mb-5 mb-md-6">
+                                            <input class="n11-bg"  placeholder="Username"
+                                                type="text" formControlName="username"
+                                                autocomplete="username">
+                                        </div>
+                                        <div class="mb-5 mb-md-6">
+                                            <input class="n11-bg"  placeholder="Email"
+                                                type="email" formControlName="email"
+                                                autocomplete="email">
+                                        </div>
+                                        <div *ngIf="false" class="mb-5 mb-md-6">
+                                            <input class="n11-bg"  placeholder="Invited by  {{authService.invitedBy}}"
+                                                type="text" formControlName="RefCode" readonly>
+                                        </div>
+                                        <div class="mb-5 mb-md-6 password-input">
+                                            <input class="n11-bg" placeholder="Password"
+                                              [type]="authService.showPassword ? 'text' : 'password'"
+                                                autocomplete="current-password"
+                                                formControlName="password">
+                                                <span (click)="authService.togglePassword()"  class="show-pass-btn">
+                                                  <i *ngIf="authService.showPassword" class="fa fa-eye-slash"></i>
+                                                  <i *ngIf="!authService.showPassword" class="fa fa-eye"></i>
+                                                </span>
+                                        </div>
+                                        <button [class.inactive-btn]="!form.valid" class="cmn-btn px-5 py-3 mb-6 w-100" type="submit">Register</button>
+                                    </form>
+                                </div>
+
+                                <span class="d-center gap-1">Already registered? <a class="g1-color" (click)="authService.router.navigate(['/login'])">Login</a></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

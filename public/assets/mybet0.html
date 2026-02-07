@@ -1,0 +1,91 @@
+
+  {%extends 'main/base.html'%}
+  {%load static%}
+  {% load humanize %}
+
+
+  {%block body%}
+
+  {% include 'includes/components/header2.html' %}
+  {% include 'includes/components/tabs.html' %}
+  {% block header %}<span class="">Mybet</span>{%endblock%}
+  <section class="mybet__chat pb-8 pb-md-10 container-fluid">
+    <div class="top_matches__title d-flex align-items-center gap-2 mb-4 mb-md-6">
+        <img src="static/assets/images/icon/floorball.png" alt="Icon">
+        <h4>Statistics</h4>
+    </div>
+    <div class="chat-income-sec snipcss0-0-0-1">
+        <div class="chat-income snipcss0-1-1-2">
+            <div class="snipcss0-2-2-3">
+                <img src="https://up2client.com/envato/payfast-pwa/main-file/light-mode/assets/svg/income-icon.svg" alt="income-icon" class="snipcss0-3-3-4">
+            </div>
+            <div class="chat-txt snipcss0-2-2-5">
+                <h2 class="chat-txt1 snipcss0-3-5-6">${{track_winning_rec.profit.won|floatformat:1}}</h2>
+                <!-- <span class="fs-seven cpoint ">Won</span> -->
+                <p class="chat-txt2 snipcss0-3-5-7">Won</p>
+            </div>
+        </div>
+        <div class="chat-expense snipcss0-1-1-8 snipcss0-0-0-1">
+            <div class="snipcss0-2-8-9 snipcss0-1-1-2">
+                <img src="https://up2client.com/envato/payfast-pwa/main-file/light-mode/assets/svg/expense-icon.svg" alt="income-icon" class="snipcss0-3-9-10 snipcss0-2-2-3">
+            </div>
+            <div class="chat-txt snipcss0-2-8-11 snipcss0-1-1-4">
+                <h2 class="chat-txt1 color-red snipcss0-3-11-12 snipcss0-2-4-5">${{track_winning_rec.profit.loss|floatformat:1}}</h2>
+                <p class="chat-txt2 snipcss0-3-11-13 snipcss0-2-4-6">Lost</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="bet-history__tab container-fluid pb-8 pb-md-10">
+
+    <div class="tabs mb-10 ">
+      <ul class="tabs-nav">
+        <li class="tab-active"><a href="#tab-1">Open</a></li>
+        <li><a href="#tab-2">Settled</a></li>
+      </ul>
+      <div class="tabs-stage">
+        <div class="tab-1 openbet" id="tab-1">
+            <p class="no-data">No data found.</p>
+        </div>
+        <div class="tab-2 settled" id="tab-2">
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <script type="text/javascript">
+      let Tab=document.querySelector('.tabs')
+      activateTab(Tab)
+      Tab.querySelector('.tab-2.settled').innerHTML=`
+      <div class="table-responsive">
+      <div class="settled-tab">
+
+          <div class="tabs-header d-flex align-items-center gap-2 ">
+              <div class="top_matches__innercount-item clickable-active py-1 px-8 rounded-3 n11-bg">
+                  <span data-key='tab-1' class="fs-seven mb-1 won">Won</span>
+              </div>
+              <div class="top_matches__innercount-item  py-1 px-8 rounded-3 n11-bg">
+                  <span data-key='tab-2' class="fs-seven mb-1 loss">Loss</span>
+              </div>
+              <div class="top_matches__innercount-item  py-1 px-8 rounded-3 n11-bg">
+                  <span data-key='tab-3' class="fs-seven mb-1 cancelled">Canceled</span>
+              </div>
+          </div>
+
+          <div class="tabs-content mt-7">
+              <div  class="tab-1 won hide"><p class="no-data">No data found.</p></div>
+              <div class="tab-2 loss hide"><p class="no-data">No data found.</p></div>
+              <div class="tab-3 cancelled  hide"><p class="no-data">No data found.</p></div>
+          </div>
+
+        </div>
+      </div>`
+        activateTab2(Tab.querySelector('.tab-2.settled'))
+    </script>
+    {%block script%}
+      <script type="module" src="{% static 'app/mybet.js' %}"></script>
+    {%endblock%}
+
+  {%endblock%}

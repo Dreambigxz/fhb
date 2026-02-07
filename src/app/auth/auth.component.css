@@ -1,0 +1,27 @@
+.login_section {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  isolation: isolate;
+
+  background-image: url("https://wallpapercave.com/wp/wp9338052.jpg") !important;
+  background-size: cover;
+  /* background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed; */
+
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  /* isolation: isolate; */
+  /* background-attachment: fixed !important; */
+
+  min-height: 100vh;
+}
+/* Dark overlay */
+.login_section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 19, 29, 0.85); /* adjust opacity here */
+  z-index: -1;
+}

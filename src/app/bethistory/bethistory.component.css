@@ -1,0 +1,96 @@
+
+ .bet-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.bet-summary {
+  cursor: pointer;
+}
+
+.bet-summary h5 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.arrow {
+  font-size: 14px;
+  color: #888;
+}
+
+.bet-details {
+  font-size: 13px;
+  color: #444;
+  padding-left: 8px;
+  border-left: 2px solid #ccc;
+}
+
+.no-data {
+  color: #888;
+  margin-top: 40px;
+}
+
+.no-data img {
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+.bet-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  background: rgba(var(--p2), 1);
+}
+
+.bet-summary {
+  cursor: pointer;
+}
+
+.bet-summary h5 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.arrow {
+  font-size: 14px;
+  color: #888;
+}
+
+.bet-details {
+  font-size: 13px;
+  color: #444;
+  padding-left: 8px;
+  border-left: 2px solid #ccc;
+}
+
+.no-data {
+  color: #888;
+  margin-top: 40px;
+}
+
+.no-data img {
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+
+.return, .status-won{
+  color: #67ff67
+}
+.stake, {
+  color: yellow
+}
+
+.status-cancelled{
+  color: #998;
+}
+.status-loss{
+  color: #c87171;
+}
+
+
+/* .bet table */

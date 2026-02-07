@@ -1,0 +1,31 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.otp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.otp-row input.form-control {
+  flex: 1;
+  height: 38px;
+}
+
+.otp-row .btn {
+  white-space: nowrap;
+  height: 38px;
+  line-height: 1;
+  padding: 0 1px;
+  font-size: 14px;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+.flow-bar{
+    margin-top: 3px !important;
+    padding: 12px !important;
+}

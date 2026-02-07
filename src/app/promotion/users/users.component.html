@@ -1,0 +1,79 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+<!-- <title>Level</title> -->
+
+<div class="container-fluid">
+
+  <!-- TAB Users CONTENT -->
+  <div class="tab-content">
+    <div class="container mt-12">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-bold mb-0"> Commissions History.</h6>
+            <!-- <span class="badge bg-primary">Total: {{ transactions.length }}</span> -->
+          </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <!-- <th scope="col">#</th> -->
+              <th scope="col">#</th>
+              <th scope="col">source</th>
+              <!-- <th scope="col">Gen</th> -->
+              <!-- <th scope="col">Base</th> -->
+              <th scope="col">amount</th>
+              <!-- <th scope="col">Currency</th> -->
+              <th scope="col">status</th>
+              <th scope="col">joined</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tx of subUsersContent; let i = index">
+              <!-- <th scope="row">{{ i + 1 }}</th> -->
+              <td>{{ tx.referred_user }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="{
+                    'text-danger': tx.type === 'referral',
+                    'text-warning': tx.type === 'rebate'
+                  }"
+                >
+                  {{ tx.type | titlecase }}
+                </span>
+              </td>
+              <!-- <td>{{ tx.generation }}</td> -->
+              <!-- <td>{{ tx.base_amount }}</td> -->
+              <!-- <td>{{ tx.amount | currencyConverter:false:false:5 }}</td> -->
+              <td>{{quickNav.storeData.store['wallet']?.init_currency['symbol']}}{{tx.amount|currencyConverter:false:false:5|number:(tx.amount < 0.01 && quickNav.storeData.store['wallet']?.init_currency['symbol'] ==='$'  ? '1.5-5' : '1.2-2')}}</td>
+              <!-- <td>{{ tx.currency }}</td> -->
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="{
+                    'text-success': tx.cashed,
+                    'bg-warning text-dark': !tx.cashed
+                  }"
+                >
+                  {{ tx.cashed ? 'Cashed' : 'Pending' }}
+                </span>
+              </td>
+              <td class="text-small">{{ tx.created_at | date: 'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="!subUsersContent.length" class="empty-state">
+          <div class="no-data text-center">
+            <img
+              [src]="quickNav.emptyDataUrl"
+              width="60"
+              alt="no data"
+            />
+            <p>No transactions found.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+</div>

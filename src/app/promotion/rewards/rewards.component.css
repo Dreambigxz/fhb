@@ -1,0 +1,85 @@
+.invite-level{
+  margin-bottom: 20px;
+
+}
+
+.properties {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .progress-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+} */
+
+.progress {
+  flex: 1;
+  height: 10px;
+
+  /* margin-right: 10px; */
+}
+
+/* .progress-bar {
+  height: 100%;
+} */
+
+.invite-needed {
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.deposit{
+  background: #06131d;
+}
+
+.current-level, .total-invited {
+    padding: 20px;
+    border-radius: 7px;
+    color: #fff;
+
+}
+.current-level {
+    background: linear-gradient(135deg, #d97f02, #0b2030);
+}
+.total-invited {
+    background: linear-gradient(135deg, #06131d, #0b2030);
+    color: #fff;
+}
+
+.progress-bar.in-progress {
+  background: linear-gradient(
+    90deg,
+    #f0ad4e,
+    #ffd27d,
+    #f0ad4e
+  );
+  background-size: 200% 100%;
+  animation: progressMove 1.5s linear infinite;
+}
+
+@keyframes progressMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+
+.progress-bar.completed {
+  background: #d97f02;
+}
+
+.progress-bar.locked {
+  background: #b3becb;
+}
+.check-mark {
+  color: #22c55e;
+  font-weight: bold;
+  margin-left: 4px;
+}

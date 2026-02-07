@@ -1,0 +1,231 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<section class="pb-8 pb-md-10 container-fluid">
+
+
+  <div class="bet-history__tab">
+
+    <!-- <div class="x-flex gap-4">
+      <div class="summary-card-md mt-12 secured bg-success">
+        <ul class="item-flex-list">
+          <p class="text-head">Secured</p>
+          <div *ngIf="historyServiceLoaded&&historyServiceLoaded.storeData.store['betDir']?.records as records">
+            <li><span class="text-first">Profit:</span> <span>{{ records.true?.won?.amount|currencyConverter:true }} - ({{(records.true?.won.count||0)}})</span></li>
+            <li><span class="text-first">Lost:</span><span class="text-danger">{{ records.true?.loss?.amount|currencyConverter:true  }} - ({{((records.true?.loss?.count||0))}})</span></li>
+          </div>
+        </ul>
+      </div>
+
+      <div class="summary-card-md mt-12 risk">
+        <ul class="item-flex-list">
+          <p class="text-head">Risk</p>
+          <div *ngIf="historyServiceLoaded&&historyServiceLoaded.storeData.store['betDir']?.records as records">
+            <li><span class="text-first">Profit:</span> <span>{{ records.false?.won?.amount|currencyConverter:true }} - ({{(records.false?.won.count||0)}})</span></li>
+            <li><span class="text-first">Lost:</span><span class="text-danger">{{ records.false?.loss?.amount|currencyConverter:true  }} - ({{((records.false?.loss?.count||0))}})</span></li>
+          </div>
+        </ul>
+      </div>
+    </div> -->
+
+    <div class="tabs mb-10">
+      <!-- <ul class="tabs-nav">
+        <li
+          (click)="activeTab = 'openbet'"
+          [class.tab-active]="activeTab === 'openbet'"
+        >
+          <a>Open</a>
+        </li>
+        <li
+          (click)="settledClick()"
+          [class.tab-active]="activeTab === 'settled'"
+        >
+          <a>Settled</a>
+        </li>
+      </ul> -->
+
+      <div *ngIf="historyServiceLoaded" class="tabs-stage">
+        <!-- 🟢 OPEN BETS -->
+        <div *ngIf="activeTab === 'openbet'" class="tab-1 openbet">
+          <div *ngIf="historyServiceLoaded.openBetDisplay.length; else noOpen">
+            <div
+              *ngFor="let bet of historyServiceLoaded.openBetDisplay"
+              class="bet-card"
+            >
+              <div
+                class="bet-summary d-flex justify-content-between align-items-center clickable"
+                (click)="toggleExpand(bet.id)"
+              >
+                <div>
+                  <h5>
+                    {{
+                      bet.fixture[0].teams.home.name
+                    }}
+                    vs
+                    {{ bet.fixture[0].teams.away.name }}
+                  </h5>
+                  <small>
+                    Odds: {{ bet.market_odds|number:"1.1-2" }} |
+                    Return:<span class="return">{{setProfit(bet)|currencyConverter:true}}</span> |
+                    <span class="text-small">{{ bet.fixture[0].fixture.date | date:'short' }}</span>
+                  </small>
+                  <br>
+                  <small *ngIf="bet.fixture[0].fixture.timestamp |countdown|async as time" (click)="historyServiceLoaded.CancelTicket(bet)"  class="text-danger"> <i class="ti ti-trash fs-five"></i> Delete</small>
+                </div>
+                <span class="arrow">{{
+                  expandedTicketId === bet.id ? "▲" : "▼"
+                }}</span>
+              </div>
+
+              <div *ngIf="expandedTicketId === bet.id" class="bet-details mt-2">
+                <p>Ticket ID: {{ bet.ticket_id }}</p>
+                <p>League: {{ bet.fixture[0].league.name }}</p>
+                <p>Market: {{ bet.market_value }}</p>
+                <p class="stake">Stake: {{ bet.stake_amount|currencyConverter:true }}</p>
+                <!-- <p>Start: <span class="text-deem">{{ bet.fixture[0].fixture.date | date:'short' }}</span></p> -->
+
+              </div>
+            </div>
+          </div>
+
+          <ng-template #noOpen>
+            <div class="no-data text-center">
+              <img
+                [src]="historyServiceLoaded?.emptyDataUrl"
+                width="60"
+                alt="no data"
+              />
+              <p>No open bets found</p>
+            </div>
+          </ng-template>
+        </div>
+
+        <!-- 🟠 SETTLED BETS -->
+        <div *ngIf="activeTab === 'settled'" class="tab-2 settled">
+
+          <!-- 🔹 Date Filter -->
+          <form [formGroup]="filterForm" class="filter-bar">
+            <div class="date-picker-container">
+             <!-- <mat-form-field appearance="outline" class="date-range-field"> -->
+             <mat-form-field appearance="outline" class="date-range-field no-border">
+
+               <mat-label>Select Date Range</mat-label>
+               <mat-date-range-input [rangePicker]="picker" formGroupName="range">
+                 <input matStartDate formControlName="start" placeholder="Start date">
+                 <input matEndDate formControlName="stop" placeholder="End date">
+               </mat-date-range-input>
+               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+               <mat-date-range-picker #picker></mat-date-range-picker>
+             </mat-form-field>
+
+             <button mat-raised- class="btn btn-md btn-outline-secondary filter-btn" (click)="filterByDate()">
+               <i class="ti ti-filter"></i>  Sort
+             </button>
+            </div>
+           </form>
+
+
+          <div class="tabs-content mt-7">
+            <ng-container
+              *ngIf="historyServiceLoaded&&historyServiceLoaded.allBets.length; else noSettled"
+            >
+
+            <div *ngFor="let t of historyServiceLoaded.allBets" >
+                <div class="ticket-id">
+                  <p class="">#{{ t.game }}</p>
+                </div>
+                <div class="ticket">
+
+                  <div class="ticket-header" (click)="toggle(t.id)">
+                    <div class="left">
+                      <!-- <div class="ticket-id text-deem">#{{ t.game }}</div> -->
+                      <small *ngIf="t.status==='open'&&t.fixture[0].fixture.timestamp |countdown|async as time;else displayStatus" (click)="historyServiceLoaded.CancelTicket(t)"  class="text-danger"> <i class="ti ti-trash fs-five"></i> Delete</small>
+                      <ng-template #displayStatus >
+                        <p class="status-{{t.status}}">{{ displayStatus_(t.status) }}
+                          <span *ngIf="t.status==='open'" class="green-dot"></span>
+                          <span *ngIf="t.status==='won'" class="status-{{t.status}}">  {{setProfit(t,true)|currencyConverter:true}} </span>
+                        </p>
+                      </ng-template>
+
+                    </div>
+
+                    <div class="middle">
+                      <div class="stake ">
+                        <!-- Stake:  -->
+                        {{ t.stake_amount|currencyConverter:true }}
+                      </div>
+                    </div>
+
+                    <div class="right">
+                      <!-- <span class="caret" [class.open]="expanded[t.id]">
+                        <i class="ti ti-caret-down"></i>
+                      </span> -->
+
+                      <div class="market">
+                        {{ t.market_value }}   <span class="fixed_footer__content-scr py-1 px-2 fs-seven"> %{{ t.market_odds }}</span>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Expanded details -->
+                  <div *ngIf="true" class="details">
+                    <div class="fixture-block" *ngIf="t.fixture?.length">
+
+                      <div class="space-between">
+                        <div class="league">
+                          <img [src]="t.fixture[0].league.logo" />
+                          <span  class="text-deem">{{ t.fixture[0].league.name }}</span>
+                        </div>
+
+                        <span class="score ">{{addScore(t)}}
+
+                        </span>
+                      </div>
+
+                      <div class="teams">
+                        <div class="team">
+                          <img [src]="t.fixture[0].teams.home.logo" />
+                          <span>{{ t.fixture[0].teams.home.name }}</span>
+                        </div>
+
+                        <div class="vs">vs</div>
+
+                        <div class="team">
+                          <img [src]="t.fixture[0].teams.away.logo" />
+                          <span>{{ t.fixture[0].teams.away.name }}</span>
+                        </div>
+                      </div>
+
+                      <div class="start">
+                        Start: {{ t.start_date | date:'short' }}
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </ng-container>
+
+            <ng-template #noSettled>
+              <div class="no-data text-center">
+                <img
+                  [src]="historyServiceLoaded?.emptyDataUrl"
+                  width="60"
+                  alt="no data"
+                />
+                <p>No bets found</p>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<app-menu-bottom></app-menu-bottom>

@@ -1,0 +1,58 @@
+.fixed_footer.show .fixed_footer__content{
+  overflow-y:scroll;height:auto;
+}
+
+.fixed_footer__content-selectammount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+  white-space: nowrap;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.fixed_footer__content-selectammount::-webkit-scrollbar {
+  display: none;
+}
+
+/* Optional: Hide scrollbar for Firefox */
+.fixed_footer__content-selectammount {
+  scrollbar-width: none;
+}
+
+/* Each span should have consistent size and styling */
+.fixed_footer__content-selectammount span {
+  flex: 0 0 auto;
+  text-align: center;
+  min-width: 60px;
+  /* border: 1px solid var(--border-four, #ccc); */
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Active state */
+.fixed_footer__content-selectammount span.active {
+  background-color: transparent;
+  /* var(--primary-color, #007bff); */
+  color: #fff;
+  border-color: rgb(var(--g1));
+}
+/* hover state */
+.fixed_footer__content-selectammount span.hover {
+  background-color: transparent;
+  color: #fff;
+  border-color: rgb(var(--g1));
+}
+
+input, select {
+    background: transparent !important;
+    border: none;
+}
+
+input:hover{
+  border: none !important;
+}

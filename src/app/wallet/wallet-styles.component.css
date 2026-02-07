@@ -1,0 +1,248 @@
+
+/* 2026 */
+
+.custom-select-wrapper {
+  position: relative;
+  width: 220px;
+  font-family: sans-serif;
+}
+
+.custom-select-trigger {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-select-trigger .crypto-img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.arrow {
+  margin-left: auto;
+}
+
+.custom-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #2a3b47;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: none;
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.custom-options.show {
+  display: block;
+}
+
+.custom-option {
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.custom-option:hover {
+  background-color: #06131d;
+  color: #fff;
+}
+
+
+/* Modal content styling */
+.payment-modal {
+  border-radius: 16px;
+  padding: 24px;
+  /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9); */
+}
+
+/* Text */
+.payment-modal h2 {
+  margin-bottom: 8px;
+}
+
+.payment-modal p {
+  margin-bottom: 24px;
+}
+
+/* Buttons layout */
+.options button {
+  padding: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.modal-content {
+    background-color: transparent;;
+}
+
+/* Full-page blur overlay */
+.blur-overlay {
+  position: fixed;        /* cover the viewport */
+  inset: 0;               /* top:0; bottom:0; left:0; right:0 */
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent dark overlay */
+  backdrop-filter: blur(6px);     /* actual blur effect */
+  display: flex;          /* center content */
+  align-items: center;
+  justify-content: center;
+  z-index: 999;          /* make sure it's above everything */
+}
+
+
+
+/* 2025 */
+.wallet {
+  /* max-width: 460px; */
+  /* width: auto; */
+  margin: 0 auto;
+}
+
+.method-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+
+.method-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 80px;
+  transition: all 0.25s ease;
+  background: rgb(22, 13, 35);
+  color: #333;
+}
+
+.method-btn i,
+.method-btn img {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+
+.method-btn span {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.method-btn.active {
+  background: #d97f02;
+  color: #fff;
+  border-color: rgb(22, 13, 35);
+}
+
+.method-btn.active img {
+  filter: brightness(0) invert(1);
+}
+
+.icon-img {
+  width: 24px;
+  height: 24px;
+}
+
+.card {
+  background: #06131d;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 30px 15px 15px 15px !important;
+  opacity: 0.8
+  /* max-width: 600px; */
+}
+
+.wallet-address {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4f4f4;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  font-family: monospace;
+}
+
+.copy-btn {
+  border: none;
+  color: #fff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  /* display: flex; */
+  align-items: center;
+  gap: 4px;
+}
+
+.copy-btn:hover {
+  background: #0056b3;
+}
+.crypto-section{
+}
+
+.crypto-select{
+  display: flex;
+}
+
+/*  */
+
+.deposit-container {
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Option Buttons */
+.options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.option {
+  width: 48%;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.option img {
+  width: 40px;
+  margin-bottom: 8px;
+}
+
+.option.active {
+  border-color: #FF6A02;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.code{
+  color: #06131d !important;
+}
+
+/* Main Box Background Change */
+/* .box {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+} */

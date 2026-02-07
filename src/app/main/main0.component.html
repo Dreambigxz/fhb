@@ -1,0 +1,99 @@
+<app-header></app-header>
+<app-spinner></app-spinner>
+<app-quick-notifications *ngIf="quickNav.storeData.get('notification')"></app-quick-notifications>
+
+<div class="space-top container-fluid">
+
+    <div data-v-73d89818="" class="tab container">
+      <div (click)="quickNav.go('wallet/deposit')" data-v-73d89818="" class="item">
+          <div data-v-73d89818="" class="icon">
+              <div data-v-73d89818="" class="kingkong">
+                  <div id="style-oU949" class="style-oU949"></div>
+                  <!-- <img src="https://h5.ownone.pro/static/img/invite-icon.f2863395.svg" draggable="false"> -->
+                  <i class="ti ti-wallet q-icon"></i>
+              </div>
+          </div>
+        <span>Deposit</span>
+
+      </div>
+      <div (click)="quickNav.go('wallet/withdraw')" data-v-73d89818="" class="item">
+          <div data-v-73d89818="" class="icon">
+              <div data-v-73d89818="" class="kingkong">
+                  <div id="style-XjsOe" class="style-XjsOe"></div>
+                  <!-- <img src="https://h5.ownone.pro/static/img/foundation-icon.562adc6f.svg" draggable="false"> -->
+                  <i class="ti ti-exchange q-icon"></i>
+              </div>
+          </div>
+          <span>Withdraw</span>
+
+      </div>
+      <div (click)="quickNav.go('promotions/rewards')" data-v-73d89818="" class="item">
+          <div data-v-73d89818="" class="icon">
+              <div data-v-73d89818="" class="kingkong">
+                  <div id="style-GBFTT" class="style-GBFTT"></div>
+                  <!-- <img src="https://h5.ownone.pro/static/img/platform-currency-icon.c5e449ba.svg" draggable="false"> -->
+                  <i class="ti ti-gift q-icon"></i>
+              </div>
+          </div>
+          <span>Rewards</span>
+
+      </div>
+
+      <div (click)="quickNav.openTab(storeData.store['telegramHelp'])" data-v-73d89818="" class="item">
+          <div data-v-73d89818="" class="icon">
+              <div data-v-73d89818="" class="kingkong">
+                  <div id="style-omNpS" class="style-omNpS"></div>
+                  <i class="ti ti-help q-icon"></i>
+                  <!-- <img src="https://h5.ownone.pro/static/img/exchange.916891e7.svg" draggable="false"> -->
+              </div>
+          </div>
+          <span>Help</span>
+
+      </div>
+      <div [class.inactive-content]="!quickNav.storeData.get('can_download_app')" (click)="appManager.installApp()"  data-v-73d89818="" class="item">
+          <div data-v-73d89818="" class="icon">
+              <div data-v-73d89818="" class="kingkong">
+                  <div id="style-omNpS" class="style-omNpS"></div>
+                  <i class="ti ti-download q-icon"></i>
+                  <!-- <img src="https://h5.ownone.pro/static/img/exchange.916891e7.svg" draggable="false"> -->
+              </div>
+          </div>
+          <span>App</span>
+
+      </div>
+    </div>
+
+    <app-slider></app-slider>
+
+      <div data-v-1cc70779 data-v-2395076d class="u-notice-bar u-type-none-light-bg snipcss-bqsrZ style-ipoKw" mode="horizontal" id="style-ipoKw">
+        <div data-v-1cc70779 class="u-direction-row">
+            <div data-v-1cc70779 class="u-icon-wrap">
+                <div data-v-a165ad4e data-v-1cc70779 class="u-icon u-left-icon u-icon--right">
+                  <i class="ti ti-volume"></i>
+                    <!-- <div data-v-a165ad4e class="u-icon__icon uicon-volume-fill u-iconfont style-k3LxU" id="style-k3LxU"></div> -->
+                </div>
+            </div>
+            <div (click)="quickNav.openTab(storeData.store['telegramChannel'])" data-v-1cc70779 id="u-notice-box" class="u-notice-box">
+                <div data-v-1cc70779 id="u-notice-content" class="u-notice-content style-Wd7nw">
+                    <p data-v-1cc70779 class="u-notice-text u-type-none style-L7Ss9" id="style-L7Ss9"><span>Innovative financial technology leads the future of wealth. Welcome to FBS!!! Follow our channel for more update. <i class="ti ti-telegram"></i> <strong>Join now</strong> </span></p>
+                </div>
+            </div>
+            <div data-v-1cc70779 class="u-icon-wrap"></div>
+        </div>
+    </div>
+
+  <app-secured *ngIf="quickNav.storeData.store['soccer']"></app-secured>
+  <app-upcomming></app-upcomming>
+
+</div>
+
+<a *ngIf="storeData.store['telegramChannel']"
+  [href]="storeData.store['telegramChannel']"
+  target="_blank"
+  class="telegram-float"
+  aria-label="Chat with us on Telegram"
+>
+  <i class="ti ti-brand-telegram"></i>
+</a>
+
+<app-menu-bottom></app-menu-bottom>

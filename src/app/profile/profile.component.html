@@ -1,0 +1,181 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+
+<div class="container-fluid">
+
+  <div data-v-35a27079 class="header-container header-tier1 snipcss-vKaJz">
+    <div data-v-35a27079 class="header">
+        <div data-v-35a27079 data-op="me-account" class="account-wrap islogin">
+            <span data-v-35a27079 class="user avatar">
+                <div data-v-506e0cfc data-v-35a27079 class="avatar-wrap"><img data-v-506e0cfc src="https://wallpapercave.com/uwp/uwp4624504.png" class="avatar-image"><img data-v-506e0cfc src="https://s.sporty.net/common/avatar_frame/tier_empty.png" class="avatar-frame"></div>
+            </span>
+            <div data-v-35a27079 class="wording-wrap">
+                <div data-v-35a27079 class="account">
+                    <div data-v-35a27079 data-op="me_loggedin-phone" class="name fs-exclude">{{quickNav.storeData.store['username']}}</div>
+                </div><i data-v-35a27079 class="m-icon-arrow1"></i>
+            </div>
+
+            <div class="badge badge-vip">
+              VIP - {{ quickNav.storeData.get('wallet')?.vip ?? 0 }}
+              <!-- {{ quickNav.storeData.get('vip')?.replaceAll("P",'P-') ?? 0 }} -->
+            </div>
+
+
+
+        </div>
+
+        <!-- <app-flow></app-flow> -->
+
+
+
+        <!-- <div data-v-35a27079 class="balance-wrap">
+            <div data-v-35a27079 class="">Available Balance</div>
+            <div *ngIf="quickNav.storeData.store['wallet'] as walletData" data-v-35a27079 data-op="me_balance" class="value"><span data-v-35a27079>{{walletData.balance.new|currencyConverter:true}}</span></div>
+        </div> -->
+
+
+
+        <div data-v-35a27079 class="w-d-wrap">
+            <div (click)="quickNav.go('wallet/deposit')" data-v-35a27079 data-op="me_deposit" class="deposit"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/deposit.110c0873e3.png" class="w-d-wrap-img"><span data-v-35a27079 data-cms-key="deposit" data-cms-page="wap_me">Deposit</span></div>
+            <div (click)="quickNav.go('wallet/withdraw')" data-v-35a27079 data-op="me_withdraw" class="withdraw"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/withdrawal.22f45e3534.png" class="w-d-wrap-img"><span data-v-35a27079 data-cms-key="withdraw" data-cms-page="wap_me">Withdraw</span></div>
+        </div>
+
+    </div>
+  </div>
+
+  <!-- <div data-v-35a27079 class="transaction-wrap snipcss-2HKYK mb-12">
+    <div (click)="quickNav.go('wallet/records')" data-v-35a27079 data-op="me_transaction" class="transaction-wrap-item transaction"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/transaction.4d2d40c644.svg" class="transaction-wrap-item-img"><span data-v-35a27079 data-cms-key="transactions" data-cms-page="wap_me">Transactions</span></div>
+    <div (click)="quickNav.go('promotions/rewards')" data-v-35a27079 class="transaction-wrap-item gift"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/gift.0c7224b2a3.svg" class="transaction-wrap-item-img"><span data-v-35a27079 data-cms-key="gifts_nums" data-cms-page="wap_me">Rewards</span><span data-v-35a27079 class="small-red-dot"></span></div>
+    <div (click)="quickNav.go('promotions/inactive-users')" data-v-35a27079 data-op="me_sb_bethistory" class="transaction-wrap-item history"><img data-v-35a27079 src="https://s.sporty.net/global/main/brand/sportybet/mobile/images/bet_history.76d3fd43f4.svg" class="transaction-wrap-item-img"><span data-v-35a27079 data-cms-key="sports_bet_history" data-cms-page="wap_me">Inactive Surbordinates</span></div>
+
+  </div> -->
+
+  <div (click)="quickNav.go('wallet/records')" data-v-35a27079="" class="item">
+    <div data-v-35a27079="" class="image">
+      <i class="ti ti-history"></i>
+    </div>
+    <div data-v-35a27079="" class="title-wrapper" data-cms-key="how_to_play" data-cms-page="wap_me">Transactions</div>
+    <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
+      <i style="font-size:19px" class="ti ti-caret-right"></i>
+
+    </div>
+  </div>
+
+  <div (click)="quickNav.go('promotions/rewards')" data-v-35a27079="" class="item">
+    <div data-v-35a27079="" class="image">
+      <i style="font-size:19px" class="ti ti-gift"></i>
+    </div>
+    <div data-v-35a27079="" class="title-wrapper" data-cms-key="how_to_play" data-cms-page="wap_me">Rewards</div>
+    <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
+      <i class="ti ti-caret-right"></i>
+
+    </div>
+  </div>
+
+    <div (click)="quickNav.openTab('https://t.me/FHBCS123')" data-v-35a27079="" class="list-wrap mt-2">
+    <!-- Customer Service -->
+    <div data-v-35a27079="" class="item">
+      <div data-v-35a27079="" class="image image-customer-service">
+        <!-- <i class="ti ti-support"></i> -->
+        <img data-v-35a27079="" src="//s.sporty.net/global/main/brand/sportybet/mobile/images/help_centre.fec603d91a.svg" class="item-img">
+      </div>
+      <div data-v-35a27079="" class="title-wrapper" data-cms-key="customer_service" data-cms-page="common_functions">Suppport</div>
+      <div data-v-35a27079="" class="info" data-cms-key="24_7_online" data-cms-page="common_functions">Active 24/7 </div>
+      <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
+        <i class="ti ti-caret-right"></i>
+      </div>
+    </div>
+    </div>
+
+    <a (click)="openModal()" data-v-35a27079="" class="item">
+      <div data-v-35a27079="" class="image">
+        <i class="ti ti-key"></i>
+      </div>
+      <div data-v-35a27079="" class="title-wrapper" data-cms-key="notification_center" data-cms-page="wap_me">Reset Password</div>
+      <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
+        <i class="ti ti-caret-right"></i>
+      </div>
+    </a>
+
+  <!-- Notification Center -->
+    <a (click)="quickNav.go('notifications')" data-v-35a27079="" class="item">
+      <div data-v-35a27079="" class="image">
+        <i class="ti ti-bell"></i>
+      </div>
+      <span data-v-35a27079="" class="red-dot red-dot-top-right-notification-center"></span>
+      <div data-v-35a27079="" class="title-wrapper" data-cms-key="notification_center" data-cms-page="wap_me">Messages</div>
+      <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
+        <i class="ti ti-caret-right"></i>
+      </div>
+    </a>
+
+
+
+  <!-- Download -->
+    <div (click)="appManager.installApp()" [class.content-disabled]="!quickNav.storeData.store['can_download_app']&&!quickNav.storeData.store['installIOS']" data-v-35a27079="" class="item">
+      <div data-v-35a27079="" class="image">
+        <!-- <img data-v-35a27079="" src="//s.sporty.net/global/main/brand/sportybet/mobile/images/thought.8416226b5e.svg" class="item-img"> -->
+        <i class="ti ti-download"></i>
+      </div>
+      <div data-v-35a27079="" class="title-wrapper" data-cms-key="share_your_thoughts" data-cms-page="wap_me">Get App</div>
+      <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
+        <i class="ti ti-caret-right"></i>
+
+      </div>
+    </div>
+
+    <!-- LOGOUT -->
+    <div (click)="quickNav.authService.logout(false)" data-v-35a27079="" class="item">
+      <div data-v-35a27079="" class="image">
+        <i class="ti ti-logout"></i>
+      </div>
+      <div data-v-35a27079="" class="title-wrapper" data-cms-key="how_to_play" data-cms-page="wap_me">Logout</div>
+      <div data-v-1dd37524="" data-v-35a27079="" class="item-img more icon-font-base" style="font-size: 1.33333rem;">
+        <i class="ti ti-caret-right"></i>
+
+      </div>
+    </div>
+
+<!-- </div> -->
+
+</div>
+
+<div class="flex language d-flex">
+  <div class="custom-google-select " id="google_translate_element"></div>
+</div>
+
+<app-menu-bottom></app-menu-bottom>
+
+
+<!-- chamge Password modal -->
+
+<div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="changePassword" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title fs-5">Resset Password</h4>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="deposit__form">
+          <form [formGroup]="form" class="online" (ngSubmit)="onSubmit()">
+              <div class="mb-5 mb-md-6">
+                  <input class="n11-bg"   placeholder="Old password" type="text" required formControlName="old-password">
+              </div>
+              <div class="mb-5 mb-md-6">
+                  <input class="n11-bg"   placeholder="New password" type="text" required formControlName="new-password">
+                  <!-- <span></span> -->
+              </div>
+
+              <button
+              [class.inactive-btn]="!form.valid"
+              class="cmn-btn px-5 py-3 mb-6 w-100" type="submit">Enter
+            </button>
+          </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>

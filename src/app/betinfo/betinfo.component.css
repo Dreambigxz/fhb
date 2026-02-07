@@ -1,0 +1,188 @@
+.match-card {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  isolation: isolate;
+
+  background-image: url("/assets/images/match_bg.png") !important;
+  background-size: cover;
+  /* background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed; */
+
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  /* isolation: isolate; */
+  /* background-attachment: fixed !important; */
+
+  min-height: 20vh;
+}
+
+/* Dark overlay */
+.match-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 19, 29, 0.75); /* adjust opacity here */
+  z-index: -1;
+}
+
+
+tbody.justify-items-center {
+    justify-items: center;
+    display: block;
+}
+
+.avatar--sm { width: 2.5rem; height: 2.5rem; }
+.avatar--md { width: 3.5rem; height: 3.5rem; }
+.avatar--lg { width: 5rem; height: 5rem; }
+
+.avatar--sm,
+.avatar--md,
+.avatar--lg {
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* odds prev */
+@font-face {
+  font-display:swap;
+  font-family:avenirNext;
+  font-style:normal;
+  font-weight:400;
+  /* src:url(https://s.sporty.net/global/main/modules/main/desktop/common/core/style/font/avenirNext-Regular.aaed737e6d.ttf) format("truetype"); */
+}
+
+.m-table {
+    row-gap: 23px;
+    display: grid
+}
+
+.m-table-cell  {
+    display: table-cell;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-width: 1%;
+}
+
+.m-table-row  {
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    width: 100%;
+    margin-top: 12em:
+}
+
+.m-main-bottom > .m-table-row {
+    -webkit-box-align: normal!important;
+    -webkit-align-items: normal!important;
+    -ms-flex-align: normal!important;
+    align-items: normal!important;
+}
+
+.m-layout-main > * {
+    min-height: 100%;
+}
+
+
+.m-outcome {
+    padding-bottom: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.m-table-row  {
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+.m-table-cell  {
+    vertical-align: middle;
+    margin: 0 2px;
+    position: relative;
+    padding: 7px 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #06131d, #0b2438);
+    color: #fff;
+    border-radius: 7px;
+    /* border-top-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px; */
+}
+
+.m-table-cell--responsive:hover  {
+    background: #1a1b1f;
+    cursor: pointer;
+}
+.m-table-cell--responsive.active  {
+    background: #07141d;
+    /* cursor: pointer; */
+}
+
+.m-table-cell:last-of-type  {
+    margin-right: 0;
+}
+
+.m-table-cell-item  {
+    display: inline-block;
+    height: 100%;
+    font-size: 14px;
+}
+
+.m-table-cell-item  {
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.m-table-cell-item:first-of-type  {
+    max-width: calc(100% - 65px);
+    text-align: left;
+    display: grid;
+}
+
+.m-table-cell-item:last-of-type  {
+    max-width: 65px;
+    float: right;
+    font-weight: bold;
+    text-align: right;
+    padding-left: 5px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.anti-label.d-flex {
+    justify-content: space-around;
+
+    span{
+      font-weight: 800;
+      font-size: 15px;
+      color: #999
+    }
+}
+
+
+input, select {
+    background: transparent !important;
+    border: none;
+}
+
+
+/* These were inline style tags. Uses id+class to override almost everything */
+#style-FBHIN.style-FBHIN {
+   width: 33.3333%;
+}
+#style-sPFnR.style-sPFnR {
+   width: 33.3333%;
+}
+#style-A4NwN.style-A4NwN {
+   width: 33.3333%;
+}

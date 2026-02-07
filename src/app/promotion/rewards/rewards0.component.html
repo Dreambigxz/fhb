@@ -1,0 +1,94 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div class="space-top">
+  <section class="wallet container-fluid ">
+
+    <div *ngIf="storeData.store['invite-rewards'] as data" class="container mt-4">
+      <!-- Header Summary -->
+      <!-- Totals Summary -->
+      <div class="summary-card mb-12">
+        <ul class="item-flex-list">
+          <li><span class="text-first">Current Level:</span> <span>{{ data.level }}</span></li>
+          <li><span class="text-first">Total Team Invites:</span><span>{{ data.total_invites }}</span></li>
+          <li><span class="text-first">Total Team Deposit:</span> <span class="text-deem"> {{data.total_deposit |currencyConverter:true}} </span></li>
+          <li><span class="text-first">Total Earnings:</span> <span class="text-deem"> {{data.total_earning |currencyConverter:true}} </span></li>
+        </ul>
+      </div>
+
+      <!-- Level Progress Section -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header -light fw-bold">
+          <h4>Earning Levels</h4>
+        </div>
+        <div class="card-body p-0 mt-3">
+          <div *ngFor="let lvl of data.invite_levels; let i = index"
+               class="d-flex justify-content-between align-items-center p-3 sigle-card"
+               [class.bg]="lvl.id <= data.level">
+            <div class="row">
+              <h6 class="mb-1">Level {{ lvl.id }}</h6>
+              <small class="text-deem" [class.text-success]="lvl.id<=data.earning_history.length">Invites: {{ lvl.invites_required }}</small>
+              <!-- <small class="text-muted">Deposit: {{ lvl.deposit_required |currencyConverter:true}}</small> -->
+
+            </div>
+            <div class="text-end">
+              <div class="fw-semibold">Get: {{ lvl.reward_amount |currencyConverter:true}}</div>
+              <span *ngIf="lvl.id<=data.earning_history.length" class="justify-right badge bg-success">Completed</span>
+              <span *ngIf="lvl.id==data.earning_history.length+1" class="justify-right badge bg-warning">Running</span>
+              <span *ngIf="lvl.id>=data.earning_history.length+2" class="justify-right text-deem badge bg-dark">Pending</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earning History -->
+      <div class="card shadow-sm border-0">
+        <div class="card-header -light fw-bold">
+          <h4>Reward History</h4>
+        </div>
+        <div class="card-body p-0 mt-3">
+          <div *ngIf="data.earning_history.length; else noHistory">
+            <div class="table-responsive">
+              <table class="table table align-middle mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <!-- <th>#</th> -->
+                    <th>Level</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <!-- <th>Ref</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let earn of data.earning_history; let i = index">
+                    <!-- <td>{{ i + 1 }}</td> -->
+                    <td>{{ earn.level }}</td>
+                    <td>${{ earn.amount }}</td>
+                    <td class="text-small">{{ earn.granted_at | date:'short' }}</td>
+                    <!-- <td>{{ earn.txref }}</td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <ng-template #noHistory>
+
+            <div  class="empty-state mt-10 mb-10">
+              <div class="no-data text-center">
+                <img
+                  src="assets/images/empty-box.png"
+                  width="60"
+                  alt="no data"
+                />
+                <p>No transactions found.</p>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>

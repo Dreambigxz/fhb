@@ -1,0 +1,169 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+
+<div class="space-top">
+  <section class="container-fluid ">
+
+      <div class="flex language d-flex">
+        <div class="custom-google-select " id="google_translate_element"></div>
+      </div>
+
+    <div class="media snipcss-Q3PIy">
+
+           <img class="thumb" src="https://s.sporty.net/common/avatar/12.png" alt="img">
+           <div *ngIf="quickNav.storeData.store['profile'] as request" class="media-body">
+               <h6 class="profile-name">{{request.username}}</h6>
+               <p class="profile-mail">{{request.email}}</p>
+               <!-- <div class="custom-google-select " id="google_translate_element"></div> -->
+
+           </div>
+           <img class="star star1" src="https://webnextpro.com/tf/betpro/assets/img/icon/star.png" alt="img">
+           <img class="star star2" src="https://webnextpro.com/tf/betpro/assets/img/icon/star.png" alt="img">
+       </div>
+
+
+
+
+    <div >
+
+        <!-- Totals Summary -->
+        <div class="summary-card mt-12">
+          <ul class="item-flex-list">
+
+            <!-- <div *ngIf="quickNav.storeData.store['profile'] as prof">
+              <li><span class="text-first">Usernnamme:</span> <span>{{ prof.username}}</span></li>
+              <li><span class="text-first">Email:</span> <span>{{ prof.email}}</span></li>
+            </div> -->
+
+
+            <div *ngIf="quickNav.storeData.store['wallet']?.history as wh">
+              <li><span class="text-first">Total Deposit:</span> <span>{{ wh.deposit|currencyConverter:true }}</span></li>
+              <li><span class="text-first">Total Withdraw:</span> <span>{{ wh.withdraw|currencyConverter:true }} </span></li>
+            </div>
+
+            <!-- <div *ngIf="quickNav.storeData.store['wallet']?.history as wh">
+              <li><span class="text-first">Teams Earning :</span> <span>{{ wh.deposit|currencyConverter:true }}</span></li>
+              <li><span class="text-first">Total Withdraw:</span> <span>{{ wh.withdraw|currencyConverter:true }} </span></li>
+            </div> -->
+
+            <div *ngIf="quickNav.storeData.store['betDir']?.records as records">
+              <li><span class="text-first">Betting Profit:</span> <span>{{ records.true?.won?.amount|currencyConverter:true }} - ({{(records.true?.won.count)}})</span></li>
+              <li><span class="text-first">Betting Lost:</span><span class="text-danger">{{ records.false?.won?.amount|currencyConverter:true  }} - ({{((records.false?.won.count))}})</span></li>
+
+            </div>
+
+            <!-- <li><span class="text-first">Total earnings:</span> <span class="text-deem"> {{records.false.won.amount}} </span></li> -->
+            <!-- <li (click)="quickNav.go('/promotions/inactive-users')"><span class="text-first  ">Inactive teams:</span> <span class=" inactive-count text-danger"> {{data.total.generation_1 - data.active.generation_1}} </span></li> -->
+          </ul>
+        </div>
+    </div>
+
+    <div class="pb-20  snipcss0-0-0-1 snipcss-mmxfo">
+      <ul class="profile-list-inner snipcss0-1-1-2">
+          <!-- <li class="snipcss0-2-2-3">
+              <a class="single-profile-wrap snipcss0-3-3-4" href="javascript:void(0)"><svg class="svg-inline--fa fa-user fa-w-14 snipcss0-4-4-5" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
+                  </svg> My Profile <i class="ti ti-caret-right snipcss0-4-4-6"></i></a>
+          </li> -->
+          <!-- <li class="snipcss0-2-2-7">
+              <a class="single-profile-wrap snipcss0-3-7-8" href="javascript:void(0)">
+
+                  <div class="flex language">
+                    <i class="ph ph-translate text-xl"></i>
+                    <div class="custom-google-select " id="google_translate_element"></div>
+                </div> <i class="ti ti-language snipcss0-4-8-10">
+                </i></a>
+          </li> -->
+          <li class="snipcss0-2-2-7">
+              <a (click)="quickNav.go('wallet/deposit')" class="single-profile-wrap snipcss0-3-7-8" href="javascript:void(0)"><svg class="svg-inline--fa fa-wallet fa-w-16 snipcss0-4-8-9" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="wallet" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M461.2 128H80c-8.84 0-16-7.16-16-16s7.16-16 16-16h384c8.84 0 16-7.16 16-16 0-26.51-21.49-48-48-48H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h397.2c28.02 0 50.8-21.53 50.8-48V176c0-26.47-22.78-48-50.8-48zM416 336c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"></path>
+                  </svg> Deposit <i class="ti ti-caret-right snipcss0-4-8-10"></i></a>
+          </li>
+          <li class="snipcss0-2-2-11">
+              <a (click)="quickNav.go('wallet/withdraw')" class="single-profile-wrap snipcss0-3-11-12" href="javascript:void(0)"> <svg class="svg-inline--fa fa-users fa-w-20 snipcss0-4-29-30" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="users" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg="">
+                  <path fill="currentColor" d="M342.8 352.7c5.7-9.6 9.2-20.7 9.2-32.7 0-35.3-28.7-64-64-64-17.2 0-32.8 6.9-44.3 17.9-16.3-29.6-47.5-49.9-83.7-49.9-53 0-96 43-96 96 0 2 .5 3.8.6 5.7C27.1 338.8 0 374.1 0 416c0 53 43 96 96 96h240c44.2 0 80-35.8 80-80 0-41.9-32.3-75.8-73.2-79.3zm222.5-54.3c-93.1 17.7-178.5-53.7-178.5-147.7 0-54.2 29-104 76.1-130.8 7.3-4.1 5.4-15.1-2.8-16.7C448.4 1.1 436.7 0 425 0 319.1 0 233.1 85.9 233.1 192c0 8.5.7 16.8 1.8 25 5.9 4.3 11.6 8.9 16.7 14.2 11.4-4.7 23.7-7.2 36.4-7.2 52.9 0 96 43.1 96 96 0 3.6-.2 7.2-.6 10.7 23.6 10.8 42.4 29.5 53.5 52.6 54.4-3.4 103.7-29.3 137.1-70.4 5.3-6.5-.5-16.1-8.7-14.5z"></path>
+              </svg> Withdraw <i class="ti ti-caret-right snipcss0-4-12-14"></i></a>
+          </li>
+          <!-- <li class="snipcss0-2-2-15">
+              <div class="single-profile-wrap snipcss0-3-15-16">
+                  <svg class="svg-inline--fa fa-bell fa-w-14 snipcss0-4-16-17" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z"></path>
+                  </svg> Push Notification <label class="switch snipcss0-4-16-18">
+                      <input type="checkbox" class="snipcss0-5-18-19">
+                      <span class="slider round snipcss0-5-18-20"></span>
+                  </label>
+              </div>
+          </li> -->
+
+          <li class="snipcss0-2-2-28">
+              <a (click)="quickNav.go('wallet/records')" class="single-profile-wrap snipcss0-3-28-29" href="javascript:void(0)"><svg class="svg-inline--fa fa-cubes fa-w-16 snipcss0-4-12-13" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="cubes" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M488.6 250.2L392 214V105.5c0-15-9.3-28.4-23.4-33.7l-100-37.5c-8.1-3.1-17.1-3.1-25.3 0l-100 37.5c-14.1 5.3-23.4 18.7-23.4 33.7V214l-96.6 36.2C9.3 255.5 0 268.9 0 283.9V394c0 13.6 7.7 26.1 19.9 32.2l100 50c10.1 5.1 22.1 5.1 32.2 0l103.9-52 103.9 52c10.1 5.1 22.1 5.1 32.2 0l100-50c12.2-6.1 19.9-18.6 19.9-32.2V283.9c0-15-9.3-28.4-23.4-33.7zM358 214.8l-85 31.9v-68.2l85-37v73.3zM154 104.1l102-38.2 102 38.2v.6l-102 41.4-102-41.4v-.6zm84 291.1l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6zm240 112l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6z"></path>
+                  </svg> Transactions <i class="ti ti-caret-right snipcss0-4-29-31"></i></a>
+          </li>
+          <li class="snipcss0-2-2-32">
+              <a (click)="quickNav.go('promotions/rewards')" class="single-profile-wrap snipcss0-3-32-33" href="javascript:void(0)"><svg class="svg-inline--fa fa-chart-line fa-w-16 snipcss0-4-33-34" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-line" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"></path>
+                  </svg> Promotion Rewards <i class="ti ti-caret-right snipcss0-4-33-35"></i></a>
+          </li>
+          <li class="snipcss0-2-2-36">
+              <a (click)="openModal()" class="single-profile-wrap snipcss0-3-36-37" href="javascript:void(0)"><svg class="svg-inline--fa fa-lock fa-w-14 snipcss0-4-37-38" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path>
+                  </svg> Change Password <i class="ti ti-caret-right snipcss0-4-37-39"></i></a>
+          </li>
+          <li [class.content-disabled]="!quickNav.storeData.store['can_download_app']&&!quickNav.storeData.store['installIOS']" (click)="appManager.installApp()" class="snipcss0-2-2-40 hide">
+              <a class="single-profile-wrap snipcss0-3-40-41" href="javascript:void(0)"><svg class="svg-inline--fa fa-exclamation-triangle fa-w-18 snipcss0-4-41-42" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exclamation-triangle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"></path>
+                  </svg>App Download <i class="ti ti-caret-right snipcss0-4-41-43"></i></a>
+          </li>
+          <li class="snipcss0-2-2-44">
+              <a (click)="quickNav.authService.logout(false)" class="single-profile-wrap snipcss0-3-44-45" href="javascript:void(0)"><svg class="svg-inline--fa fa-sign-out-alt fa-w-16 snipcss0-4-45-46" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path>
+                  </svg>Log Out <i class="ti ti-caret-right snipcss0-4-45-47"></i></a>
+          </li>
+      </ul>
+    </div>
+
+  </section>
+
+
+</div>
+
+<app-menu-bottom></app-menu-bottom>
+
+
+<!-- chamge Password modal -->
+
+<div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="changePassword" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title fs-5">Resset Password</h4>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="deposit__form">
+          <form [formGroup]="form" class="online" (ngSubmit)="onSubmit()">
+              <div class="mb-5 mb-md-6">
+                  <input class="n11-bg"   placeholder="Old password" type="text" required formControlName="old-password">
+              </div>
+              <div class="mb-5 mb-md-6">
+                  <input class="n11-bg"   placeholder="New password" type="text" required formControlName="new-password">
+                  <!-- <span></span> -->
+              </div>
+
+              <button
+              [class.inactive-btn]="!form.valid"
+              class="cmn-btn px-5 py-3 mb-6 w-100" type="submit">Enter
+            </button>
+          </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<style media="screen">
+
+</style>

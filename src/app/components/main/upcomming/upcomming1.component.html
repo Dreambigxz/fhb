@@ -1,0 +1,42 @@
+<section class="mt-12 container">
+  <div class="d-flex space-between">
+    <h5>Next Matches</h5>
+    <span (click)="router.navigate(['/matches'])" class="text-deem">All Matches <i class="ti ti-caret-right"></i></span>
+  </div>
+    <div class="row mt-5">
+
+      <div
+        *ngFor="let i of matchService.upcomingMatches; let in = index"
+        (click)="router.navigate(['/betinfo/'+i.fixtureID]);"
+
+        >
+        <div
+          *ngIf="i.fixture.fixture.timestamp | countdown:0:'upcoming' | async as time"
+          class="match-card">
+          <div class="top">
+          <div class="league small">{{ i.fixture.league.name|truncateCenter:11 }}</div>
+          <div class="date"> <i class="ti ti-clock text-main"></i> {{ i.fixture.fixture.timestamp | timeFormat }}</div>
+          </div>
+
+
+          <div class="teams">
+          <div class="team">
+          <img [src]="i.fixture.teams.home.logo" alt="home" />
+          <div class="name">{{ i.fixture.teams.home.name }}</div>
+          </div>
+
+
+          <div class="vs">VS</div>
+
+
+          <div class="team">
+          <img [src]="i.fixture.teams.away.logo" alt="away" />
+          <div class="name">{{ i.fixture.teams.away.name }}</div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>

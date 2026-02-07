@@ -1,0 +1,59 @@
+<section *ngIf="matchService.CPG.length" class="mt-12 container">
+  <div class="d-flex space-between">
+    <h5>Company Game</h5>
+  </div>
+    <div class="row mt-5">
+        <div class="col-12 gx-0 gx-sm-4">
+            <div class="">
+                <div class="row w-100">
+                    <div class="col-12">
+
+                        <div class="swiper live-playing">
+                            <div class="hero_area__topslider swiper-wrapper ">
+                              <div
+                                *ngIf="matchService.CPG[0] as i"
+                                  (click)="router.navigate(['/betinfo/'+i.fixtureID]);"
+                                  class="hero_area__topslider-card swiper-slide p-4 p-md-6"
+                                  >
+
+                                  <div
+                                    *ngIf="i.fixture.fixture.timestamp | countdown:0 | async as time"
+
+                                    >
+                                    <div
+                                        class="hero_area__topslider-cardtop d-flex align-items-center justify-content-between mb-4 mb-md-6">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="ti ti-ball-football n5-color"></i>
+                                            <span class="fs-seven n5-color cpoint">{{i.fixture.league.name}}</span>
+                                        </div>
+                                        <span class="fs-seven n5-color cpoint">{{i.fixture.fixture.timestamp|timeFormat:"fullDate"}}</span>
+                                    </div>
+                                    <div
+                                        class="hero_area__topslider-cardbody d-flex align-items-center justify-content-between mb-4 mb-md-6">
+                                        <div class="hero_area__topslider-flag">
+                                            <div class="hero_area__topslider-flagbox mb-2">
+                                                <img src="{{i.fixture.teams.home.logo}}" alt="icon">
+                                            </div>
+                                            <h6 class="cpoint">{{i.fixture.teams.home.name}}</h6>
+                                        </div>
+                                        <div class="hero_area__topslider-vs">
+                                            <span class="fw-bold n5-color">VS</span>
+                                        </div>
+                                        <div
+                                            class="hero_area__topslider-flag text-end d-flex flex-column justify-content-end align-items-end ">
+                                            <div class="hero_area__topslider-flagbox mb-2">
+                                                <img src="{{i.fixture.teams.away.logo}}" alt="icon">
+                                            </div>
+                                            <h6 class="cpoint">{{i.fixture.teams.away.name}}</h6>
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>

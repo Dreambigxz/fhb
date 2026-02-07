@@ -1,0 +1,26 @@
+.snipcss-mmxfo{
+
+  background: rgb(22 13 35 / 80%)
+
+}
+
+
+.profile-list-inner li .single-profile-wrap{
+  background: transparent;
+  margin-bottom: 1px solid
+}
+
+.profile-list-inner {
+  background: transparent;
+}
+
+
+.media .thumb{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #c7d2fe;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2px;
+}

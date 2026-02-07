@@ -1,0 +1,7 @@
+<div *ngIf="quickNav.storeData.store['bet_settings']?.pending_flow" class="flow-bar">
+  <span>Flow Progress</span>
+  <div class="progress-container">
+    <div class="progress-bar" [style.width.%]="progressPercent"></div>
+  </div>
+  <p>{{ progressPercent | number:'1.0-0' }}%</p>
+</div>

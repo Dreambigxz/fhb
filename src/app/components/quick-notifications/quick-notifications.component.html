@@ -1,0 +1,32 @@
+
+
+<div *ngIf="showNotifications" class="notification-box">
+  <div class="header d-flex space-between">
+    <h4><i class="ti ti-message"></i> {{currentNotification?.header}}</h4>
+    <i (click)='close()' class="fa fa-close text"></i>
+  </div>
+  <ul *ngIf="currentNotification;">
+  <li>
+    {{ currentNotification?.message }}
+    <br>
+    <small class="text-deem">{{currentNotification?.timestamp|momentAgo}}</small>
+  </li>
+  </ul>
+
+  <div class="x-flex">
+    <div class="">
+      <button (click)='quickNav.go("notifications")' class="copy-btn btn btn-md btn-outline-primary text" >
+        <i class="ti ti-book"></i> messages
+      </button>
+    </div>
+
+
+    <span (click)="readNext()">
+       <i class="ti ti-arrow-right"></i>
+
+    </span>
+  </div>
+</div>
+
+<div *ngIf="showNotifications" class="blur-overlay">
+</div>

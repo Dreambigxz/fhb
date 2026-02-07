@@ -1,0 +1,124 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+
+<div class="container-fluid">
+
+<div *ngIf="quickNav.storeData.store['refDir'] as data" class="affiliate-container">
+  <div class="affiliate-dashboard">
+    <div class="referral-code-card">
+      <p>Your Referral Code</p>
+      <div class="wallet-address d-flex align-items-center justify-content-between">
+        <code>{{ refLink | truncateCenter:15}}</code>
+        <button (click)="quickNav.copy(refLink)" class="copy-btn btn btn-sm btn-outline-primary" >
+          <i class="ti ti-copy"></i> Copy
+        </button>
+      </div>
+    </div>
+
+    <div  class="section-card cash-summary mb-5 ">
+      <!-- <h3>Commission Summary</h3> -->
+      <p>Cashed Commissions: <strong class="text-success">{{ data.cashed_commissions |currencyConverter:true }}</strong></p>
+      <p>Uncashed: <strong class="text-main">{{ data.uncashed |currencyConverter:true }}</strong></p>
+      <p><small>Last Cashed At: <span class="text-deem text-small">{{ data.last_cashed_at | date: 'medium' }}</span></small></p>
+      <p><small>Next Cash At: <span class="text-warning text-small">{{nextCashCountdown$ | async}}</span></small></p>
+
+      <div class="mt-10">
+        <p><small>Referral Commission: <span class="text-deem">{{quickNav.storeData.store['refDir']?.settings.percent?.referral}}</span></small></p>
+        <p><small>Rebate Commission: <span class="text-deem">{{quickNav.storeData.store['refDir']?.settings.percent?.rebate}}</span></small></p>
+
+      </div>
+    </div>
+
+  <!-- Top Stats -->
+  <section class="stats-grid">
+    <!-- <div class="stat-card commissions">
+      <h6>Cashed</h6>
+      <strong>{{ data.cashed_commissions|currencyConverter:true }}</strong>
+    </div>
+    <div class="stat-card commissions">
+      <h6>Uncashed</h6>
+      <strong class="text-main">{{ data.uncashed|currencyConverter:true }}</strong>
+    </div> -->
+
+    <div (click)="quickNav.go('/promotions/users/'+gen.split('_')[1])" class="stat-card generation {{gen}}" *ngFor="let gen of generations">
+      <h6>{{ gen.replace("generation","team").replace("_", " ") | titlecase }}</h6>
+      <div class="stat-values mt-5">
+        <div>
+          <span>Total</span>
+          <strong>{{ data.total[gen] }}</strong>
+        </div>
+        <div>
+          <span>Active</span>
+          <strong class="text-success">{{ data.active[gen] }}</strong>
+        </div>
+      </div>
+      <button  class="copy-btn btn btn-md btn-outline-secodary view-users" >
+        Open <i class="ti ti-arrow-up-right"></i>
+      </button>
+    </div>
+
+    <div (click)="quickNav.go('/promotions/inactive-users')" class="stat-card generation ">
+      <h6 class="text-danger"> Inactive Subordinate </h6>
+      <div class="stat-values mt-5">
+        <div>
+          <!-- <span>Total</span> -->
+          <strong>{{ data.total.generation_1 - data.active.generation_1 }}</strong>
+        </div>
+
+      </div>
+      <button  class="copy-btn btn btn-md btn-outline-secodary view-users" >
+        Open <i class="ti ti-arrow-up-right"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Referral & Rebate -->
+  <section class="grid-section">
+    <h2>Referral & Rebate</h2>
+    <div class="grid-cards">
+      <div class="grid-card" *ngFor="let percent of quickNav.storeData.store['refDir']?.settings.percent?.referral;let gen=index">
+        <h5>Team {{ gen+1 }}</h5>
+        <div class="grid-item">
+          <span>Referrals </span>
+          <strong><span class="small">{{ data.referral['generation_' + (gen+1)].count }}</span> / {{ data.referral['generation_' + (gen+1)].amount |currencyConverter:true }}</strong>
+        </div>
+        <div class="grid-item">
+          <span>Rebate</span>
+          <strong><span class="small">{{ data.rebate['generation_' + (gen+1)].count }}</span> / {{ data.rebate['generation_' + (gen+1)].amount |currencyConverter:true }}</strong>
+        </div>
+
+        <!-- <p style="color:green" class="text-small">
+          You get %{{percent}} first deposit commission.
+        </p> -->
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Deposit & Withdraw -->
+  <section class="grid-section">
+    <h2>Deposit & Withdraw</h2>
+    <div class="grid-cards">
+      <div class="grid-card" *ngFor="let gen of generations">
+        <h5>{{ gen.replace("generation","team").replace("_", " ") | titlecase }}</h5>
+        <div class="grid-item">
+          <span>Deposit</span>
+          <strong>{{ data.deposit[gen].amount|currencyConverter:true }}</strong>
+        </div>
+        <div class="grid-item">
+          <span>Withdraw</span>
+          <strong>{{ data.withdraw[gen].amount|currencyConverter:true }}</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+</div>
+
+</div>
+
+<app-menu-bottom></app-menu-bottom>

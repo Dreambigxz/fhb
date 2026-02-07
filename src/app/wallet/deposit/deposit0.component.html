@@ -1,0 +1,226 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+
+<div class="space-top">
+  <section class="wallet container-fluid ">
+    <!-- <h3 class="text-center mb-4">Deposit Funds</h3> -->
+
+    <!-- 🔹 Payment Method Selector -->
+    <div class="method-select mb-4">
+
+      <!-- <div *ngIf="!storeData.store['deposit']?.length||storeData.store['deposit']?.length&&walletService.paymentMode()==='crypto'" class="crypto-select  gap-4"> -->
+      <div *ngIf="
+          !storeData.store['deposit']?.length && !storeData.store['hasMethod'] ||
+          storeData.store['deposit']?.length && walletService.paymentMode(storeData.store['deposit'][0].method)==='crypto'||
+          walletService.paymentMode(storeData.store['savedMethod'])==='crypto'
+        "
+        class="crypto-select d-flex gap-4">
+        <div *ngIf="!storeData.store['deposit']?.length||storeData.store['deposit']?.length&&['USD'].includes(storeData.store['deposit'][0].method)"
+          class="method-btn"
+          [class.active]="walletService.selectedMode === 'USD'"
+          (click)="walletService.setPaymentMode('USD')"
+        >
+          <img src="https://nowpayments.io/images/coins/usdt.svg" alt="USDT" class="icon-img" />
+          <span>USDT</span>
+        </div>
+
+        <div *ngIf="!storeData.store['deposit']?.length||storeData.store['deposit']?.length&&['TRON'].includes(storeData.store['deposit'][0].method)"
+          class="method-btn"
+          [class.active]="walletService.selectedMode === 'TRON'"
+          (click)="walletService.setPaymentMode('TRON')"
+        >
+          <img src="https://nowpayments.io/images/coins/trx.svg" alt="TRON" class="icon-img" />
+          <span>TRX</span>
+        </div>
+
+      </div>
+        <div *ngIf="
+          !storeData.store['deposit']?.length && !storeData.store['hasMethod']
+          ||storeData.store['deposit']?.length && walletService.paymentMode(storeData.store['deposit'][0].method)==='bank'
+          ||walletService.paymentMode(storeData.store['savedMethod']||'USD')==='bank'
+          "
+          class="method-btn"
+          [class.active]="walletService.selectedMode === 'BANK'"
+          (click)="walletService.setPaymentMode('BANK')"
+        >
+          <i class="ti ti-building-bank fs-five"></i>
+          <span>Bank</span>
+        </div>
+
+    </div>
+
+    <!-- 🔹 Bank Deposit Section -->
+    <div *ngIf="walletService.selectedMode === 'BANK' && storeData.store['deposit']?.length" class="bank-section card p">
+      <div>
+        <div class="x-flex">
+          <h5>Bank Deposit</h5>
+          <small (click)="walletService.cancelPayment('deposit')" class="text-danger"> <i class="ti ti-trash fs-five"></i> Delete</small>
+        </div>
+        <div  class="alert alert-warning  d-flex align-items-center gap-2 mt-5" role="alert">
+          <i class="ti ti-alert-triangle fs-5 text-warning"></i>
+          <span *ngIf="storeData.store['local_banks']&&storeData.store['local_banks'][0].automatic" class="color">
+              Click the Payment Page link below to complete your payment!
+              <br>
+              <button (click)="goToPaymentPage(storeData.store['deposit'][0])" class="btn btn" type="button" name="button">
+                Payment Page <i class="ti ti-arrow-right"></i>
+              </button>
+          </span>
+          <span *ngIf="storeData.store['local_banks']&&!storeData.store['local_banks'][0].automatic&&!storeData.store['deposit'][0].proof" class="color">
+              Deposit to our verified bank account and click on payment completed to upload your proof.
+          </span>
+          <span *ngIf="storeData.store['deposit'][0].proof"
+            [class.text-success]="walletService.previewUrl"
+            class="color">
+              Your {{storeData.store['deposit'][0].amount|currencyConverter:true:storeData.store['deposit'][0].method}} deposit is currently awaiting confirmation.
+              <span class="color mt-4">Note: Bank network could be delayed: payment takes up to 0- 3 hours to reflect.</span>
+          </span>
+
+        </div>
+
+          <div *ngIf="storeData.store['local_banks']&&!storeData.store['local_banks'][0].automatic">
+            <div *ngIf="storeData.store['local_banks'] as bank">
+              <ul *ngIf="!storeData.store['deposit'][0].proof;else awaitingpaymentConfirmationBlock" class="item-flex-list">
+                <li><span class="text-first">Bank Name:</span> <span>{{ bank[0].bank }}</span></li>
+                <li><span class="text-first">Account No:</span>
+                  <span class="">
+                    <button (click)="walletService.copyContent(bank[0].account_number)" class="copy-btn btn btn-sm btn-outline-primary text-right" >
+                      <i class="ti ti-copy"></i> Copy
+                    </button><br>
+                    {{ bank[0].account_number }}
+                  </span>
+                </li>
+                <li><span class="text-first">Account Name:</span> <span>{{ bank[0].account_holder }}</span></li>
+              </ul>
+            </div>
+
+
+            <ng-template #awaitingpaymentConfirmationBlock>
+              <ul *ngIf="storeData.store['deposit'][0] as deposit" class="item-flex-list">
+                <li><span class="text-first">Amount:</span> <span>{{ deposit.amount|currencyConverter:true:storeData.store['deposit'][0].method }}</span></li>
+                <li><span class="text-first">Created at:</span><span>{{deposit.timestamp|timeFormat:"fullDate"}}</span></li>
+                <li><span class="text-first">Confirming:</span> <span class="text-deem"> {{deposit.timestamp|countdown:3|async}} </span></li>
+              </ul>
+            </ng-template>
+
+            <div class="mt-12 text-center" *ngIf="!walletService.previewUrl">
+                Amount to send :<span class="color f-bold">{{storeData.store['deposit'][0].amount|currencyConverter:true:storeData.store['deposit'][0].method}}</span>
+            </div>
+
+            <div class="upload-wrapper mb-3 mt-5">
+              <label for="fileInput">
+                <img [src]="walletService.previewUrl || defaultImage" class="upload-preview" alt="Upload image" />
+              </label>
+              <input
+                type="file"
+                id="fileInput"
+                hidden
+                accept="image/*"
+                (change)="walletService.onImageSelected($event)"
+              >
+              <small *ngIf="" class="error"></small>
+
+            </div>
+
+              <h6 class="text-deem" style="display:flex;justify-content:center" *ngIf="!walletService.previewUrl;else attachSendersNameBlock">Upload Receipt</h6>
+
+          </div>
+          <ng-template #attachSendersNameBlock>
+              <div *ngIf="!storeData.store['deposit'][0].proof">
+                <input
+                  [(ngModel)]="walletService.localDepositSendersName"
+                  type="text"
+                  placeholder="Senders Name"
+                  class="n11-bg mb-3"
+                />
+                <span></span>
+
+                <button
+                  class="cmn-btn px-5 py-3 mb-6 w-100"
+                  [class.inactive-btn]="!walletService.selectedFile||!walletService.localDepositSendersName"
+                  (click)="walletService.paymentCompleted()"
+                  >
+                  <i class="ti ti-wallet"></i> Send
+                </button>
+              </div>
+          </ng-template>
+      </div>
+    </div>
+
+    <!-- 🔹 Crypto Deposit Section -->
+    <div *ngIf="(walletService.selectedMode === 'USD' || walletService.selectedMode === 'TRON') && storeData.store['deposit']?.length" class="crypto-section card p-3">
+
+        <div class="x-flex">
+          <h5>Crypto Deposit</h5>
+          <small  (click)="walletService.cancelPayment('deposit')" class="text-danger"> <i class="ti ti-trash fs-five"></i> Delete</small>
+        </div>
+
+        <div *ngIf="walletService.selectedMode === 'USD' || walletService.selectedMode === 'TRON'" class="alert alert-warning d-flex  align-items-center gap-1 mt-5" role="alert">
+          <i class="ti ti-alert-triangle fs-5 text-warning"></i>
+          <span class="color" *ngIf="walletService.selectedMode === 'USD'">Send only <strong>USDT (TRC20)</strong> to this address.</span>
+          <span class="color" *ngIf="walletService.selectedMode === 'TRON'">Send only <strong>TRON</strong> to this address.</span>
+        </div>
+
+        <div class="wallet-address d-flex align-items-center justify-content-between">
+          <code>{{ storeData.store['deposit'][0].extraField.pay_address |truncateCenter:20 }}</code>
+          <button (click)="walletService.copyContent(storeData.store['deposit'][0].extraField.pay_address)" class="copy-btn btn btn-sm btn-outline-primary" >
+            <i class="ti ti-copy"></i> Copy
+          </button>
+        </div>
+
+        <div class="qr-code text-center mt-3">
+          <qrcode [qrdata]="storeData.store['deposit'][0].extraField.pay_address" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+        </div>
+
+       <div class="mt-12 text-center" *ngIf="!walletService.previewUrl">
+            Amount to send :<span class="color f-bold">{{storeData.store['deposit'][0].amount|currencyConverter:true:storeData.store['deposit'][0].method}}</span>
+        </div>
+    </div>
+
+
+    <!-- 🔹 Deposit Form -->
+    <div *ngIf="!storeData.store['deposit']?.length" class="card">
+      <form [formGroup]="walletService.formView['deposit']" (ngSubmit)="walletService.handleSubmit(walletService.formView['deposit'],'create_deposit')">
+        <div class="deposit-form mt-4">
+
+          <div *ngIf="walletService.selectedMode === 'BANK'&&!storeData.store['savedMethod']" class="mb-3">
+            <label>Select currency</label>
+              <select
+                class="form-control arrow-down"
+                (change)="walletService.onCurrencySelect($event)"
+                formControlName='payment_method'
+                >
+                <option disabled="disabled" selected="selected" value="">Select</option>
+                <option *ngFor="let c of walletService.initCurrencies.slice(2)" [value]="c.code">
+                  {{ c.name }} ({{ c.symbol }})
+                </option>
+              </select>
+            </div>
+
+          <div   *ngIf="walletService.selectedMode==='BANK'&& walletService.selectedCurrency||['USD','TRON'].includes(walletService.selectedMode)" class="input-container">
+            <label>Amount</label>
+            <input
+              type="number"
+              [(ngModel)]="amount"
+              placeholder="Min {{walletService.selectedCurrency?.symbol}}{{walletService.minimumPayment}}"
+              [min]="walletService.minimumPayment"
+              class=" mb-3 n11-bg"
+              formControlName="amount"
+            />
+          </div>
+          <span></span>
+
+
+          <button
+            class="cmn-btn px-5 py-3 mb-6 w-100 mt-4"
+            [class.inactive-btn]="!walletService.formView['deposit'].valid"
+            >
+            <i class="ti ti-wallet"></i> Send
+          </button>
+
+        </div>
+      </form>
+    </div>
+  </section>
+
+</div>

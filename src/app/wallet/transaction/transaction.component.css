@@ -1,0 +1,94 @@
+.transactions-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 5px;
+  /* font-size: .9814rem; */
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.transaction-card {
+  background:#06131d;
+  opacity: 0.8;  border: 1px solid #e0e0e0;
+  border-left: 5px solid #999;
+  border-radius: 8px;
+  padding: 4px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+.transaction-card:hover {
+  transform: translateY(-2px);
+}
+
+/* .transaction-card.withdraw{
+  border-left: 5px solid var(--bs-primary);
+}
+.transaction-card.deposit{
+  border-left: 5px solid var(--bs-success);
+} */
+
+.tx-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tx-type {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.tx-type.deposit { color: #4caf50; }
+.tx-type.withdraw { color: #e4c5bb; }
+
+.tx-status {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.tx-status.pending { background: #fff3cd; color: #856404; }
+.tx-status.completed { background: #d4edda; color: #155724; }
+
+.tx-body .tx-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 4px 0;
+
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tx-footer {
+  text-align: right;
+  margin-top: 8px;
+  /* color: #fff; */
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+/* ✅ Responsive tweaks */
+@media (max-width: 480px) {
+  .tx-body .tx-row {
+    /* flex-direction: column; */
+    align-items: flex-start;
+  }
+  .tx-body .tx-row strong {
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .transaction-card {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,86 @@
+<app-header2></app-header2>
+<app-betslip *ngIf="matchService.isSlipVisible"></app-betslip>
+<app-spinner></app-spinner>
+
+
+<div class="wrapper">
+  <div>
+    <div *ngIf="fixture; else expiredFixture" class="top_matches__cmncard p2-bg p-4 rounded-3 mb-4 container-fluid">
+      <div
+        *ngIf="fixture.fixture.fixture.timestamp | countdown | async as time; else expiredFixture"
+        class="row gx-0 gy-xl-0 gy-7">
+        <div class="col-xl-12 col-xxl-12">
+
+          <div
+            class="match-card">
+            <div class="top">
+            <div class="league small">{{ fixture.fixture.league.name }}</div>
+            <div  style="font-size:10px" class="date small mt-4">  {{ fixture.fixture.fixture.timestamp | timeFormat }}</div>
+
+            </div>
+
+
+            <div class="teams">
+            <div class="team">
+            <img [src]="fixture.fixture.teams.home.logo" alt="home" />
+            <div class="name">{{ fixture.fixture.teams.home.name }}</div>
+            </div>
+
+            <div class="">
+              <div class="vs">VS</div>
+
+
+            </div>
+
+
+            <div class="team">
+            <img [src]="fixture.fixture.teams.away.logo" alt="away" />
+            <div class="name">{{ fixture.fixture.teams.away.name }}</div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-12 col-xxl-12 gap-4">
+            <div class="top_matches__clubdata">
+                <!-- <h3>Anti Score</h3> -->
+            </div>
+
+            <div class="m-table">
+              <div class="anti-label d-flex">
+                <span>Home</span>
+                <span>Draw</span>
+                <span>Away</span>
+              </div>
+              <div *ngFor="let row of predictionRows" class="m-table-row m-outcome snipcss-lEH2o">
+                <div
+                  (click)="matchService.showBetSlip(fixture,{odds:odd.odds,value:odd.value});activeRow=odd.value;activeID=fixture.fixtureID"
+                  *ngFor="let odd of row" class="m-table-cell m-table-cell--responsive style-FBHIN"
+                  [class.active]='activeRow===odd.value&&activeID===fixtureID' id="style-FBHIN"
+                  [class.content-disabled]="!odd.value||odd.value==='-'||excludeScores.includes(odd.value)"
+                  >
+                  <div *ngIf="odd.value&&odd.value!=='-'&&!excludeScores.includes(odd.value)">
+                    <span class="m-table-cell-item">{{odd.value}}</span>
+                    <span class="m-table-cell-item">{{odd.odds|number:'1.2-2'}}</span>
+                  </div>
+
+                </div>
+                <!-- <div class="m-table-cell m-table-cell--responsive style-sPFnR" id="style-sPFnR"><span class="m-table-cell-item">3:2</span><span class="m-table-cell-item">33.98</span> </div>
+                <div class="m-table-cell m-table-cell--responsive style-A4NwN" id="style-A4NwN"><span class="m-table-cell-item">4:2</span><span class="m-table-cell-item">97.50</span> </div> -->
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #expiredFixture class="empty-state">
+      <div class="no-data text-center">
+        <img
+          [src]="matchService.emptyDataUrl"
+          width="60"
+          alt="no data"
+        />
+        <p>Match not found!</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

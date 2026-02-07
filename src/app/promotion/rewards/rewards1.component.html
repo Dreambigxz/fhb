@@ -1,0 +1,128 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div  *ngIf="storeData.store['wallet'] as walletData"  class="single-page-area">
+
+    <div class="container">
+        <div class="item mt-4">
+            <div class="single-blog-card">
+                <!-- <div class="card-img"><img src="assets/img/blog/1.png" alt="img"></div> -->
+                <div class="card-details">
+                    <div class="date secure"> TOTAL EARNINGS </div>
+                    <!-- <a class="card-title" href="blog-details.html">The Best MMA Bets of the Week</a> -->
+                    <div class="blog-meta">
+                      <h4><span translate="no" class="amount">{{walletData['init_currency']['symbol']}}{{currencyConverter(storeData.store['invite-rewards']?.total_earning)|number:'1.1-1'}}</span></h4>
+                      <!-- <span class="title"><h6>Level</h6> - </span><span class="amount">{{storeData.store['invite-rewards'].level}}</span> -->
+                    </div>
+
+                    <br>
+
+                    <div class="Statistics space-around mb-12">
+                      <div class=" current-level">
+                            <h6 class="text-end">Current Level</h6>
+                            <h6 translate="no" class="text-green text-warning badge">{{storeData.store['invite-rewards']?.level}}</h6>
+                        </div>
+
+                        <div class="total-invited">
+                              <h6 class="text-end">Total Invited</h6>
+                               <h6 translate="no" class="text-green badge text-deem text-bold">{{storeData.store['invite-rewards']?.total_invites}}</h6>
+                          </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="component-wrap mt-4">
+            <div class="row">
+                <div class="col-xl-12">
+                    <!-- Basic -->
+                    <div class="widget-header">
+                        <!-- <h4>Basic Progress Bars</h4> -->
+                    </div>
+                    <div class="widget has-shadow">
+                        <div class="widget-body">
+                          <div *ngFor="let i of storeData.store['invite-rewards']?.invite_levels" class="invite-level">
+                                <div class="{{ getEarning(i.id) ? 'active' : '' }}">
+                                  <div class="properties">
+                                    <span>Level: {{i.id}} {{getEarning(i.id) ? '✅' : ''}}</span>
+                                    <span>{{i.invites_required}} Invites</span>
+                                    <span>{{walletData['init_currency']['symbol']}}{{currencyConverter(i.reward_amount) | number:'1.0-0'}}</span>
+                                  </div>
+
+                                  <div class="progress-wrapper">
+                                    <div class="progress mb-1">
+                                      <div class="progress-bar"
+                                           role="progressbar"
+                                           [style.width.%]="getProgress(i)"
+                                           [style.backgroundColor]="getEarning(i.id) ? '#1db11d' : (i.id === storeData.store['invite-rewards'].level ? '#f0ad4e' : '#ccc')">
+                                      </div>
+                                    </div>
+                                    <div class="invite-needed" *ngIf="!getEarning(i.id)">
+                                      {{ i.invites_required - (storeData.store['invite-rewards']?.total_invites || 0) }} more needed
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Basic -->
+
+                </div>
+
+            </div>
+
+            <!-- <div class="wallet-btn-wrap btn-wrap mt-4">
+                <a class="btn btn-base" routerLink="/promotions">Promotions</a>
+            </div> -->
+
+            <div class="transaction-wrap">
+                <!-- <div class="header-wrap">
+                    <div class="container">
+                        <div class="media">
+                            <h5>Earnings</h5>
+                            <select id="filterSelect" [(ngModel)]="selectedType" (change)="applyFilter()" class="single-select">
+                                <option value="All">All</option>
+                                <option value="deposit">Deposit</option>
+                                <option value="withdraw">Withdrawal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+                <ng-container *ngIf="storeData.store['invite-rewards']?.earning_history.length;else noData">
+                  <ul *ngFor="let tx of storeData.store['invite-rewards']?.earning_history" class="transaction-list">
+                      <li class="deposit">
+                          <button class="icon" data-bs-toggle="modal" data-bs-target="#deposit-modal"><i class="ri-arrow-right-up-line"></i></button>
+                          <div class="details">
+                              <h6>Level {{tx.level}} reward</h6>
+                              <span>T.id {{tx.txref}}</span>
+                              <br>
+                              <!-- <span class="text-{{tx.status}}">status</span> -->
+                              <!-- {{tx.inia}} -->
+                          </div>
+                          <div class="amount-details">
+                              <h6>{{walletData['init_currency']['symbol']}}{{currencyConverter(tx.amount)|number:"1.2-2"}}</h6>
+                              <span>{{tx.granted_at|date:'mediumDate'}}</span>
+                          </div>
+                      </li>
+                  </ul>
+                </ng-container>
+                <ng-template #noData>
+                  <div class="no-data text-center">
+                    <img
+                      [src]="quickNav.emptyDataUrl"
+                      width="60"
+                      alt="no data"
+                    />
+                    <p>No transactions found.</p>
+                  </div>
+               </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

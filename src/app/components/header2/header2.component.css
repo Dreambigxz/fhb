@@ -1,0 +1,12 @@
+.header-title{
+  text-transform: capitalize;
+}
+
+.back-page-btn i{
+  background: transparent;
+  color: #4c677a;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  padding: 3px;
+}

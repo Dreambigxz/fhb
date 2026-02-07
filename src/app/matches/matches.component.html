@@ -1,0 +1,86 @@
+<app-header2></app-header2>
+<app-spinner></app-spinner>
+
+<div class=" container-fluid">
+
+  <div class="search-container mb-12  br-12">
+    <input
+      type="text"
+      [(ngModel)]="matchService.searchTerm"
+      (input)="matchService.search()"
+      placeholder="Search by ID, Team, League, or Country"
+    />
+    <!-- <i class="ti ti-search"></i> -->
+
+  </div>
+
+
+
+  <div *ngIf="matchService.notStartedMatches as matches">
+    <div class="row mt-5">
+
+      <div
+        *ngFor="let i of matches; let in = index"
+        (click)="router.navigate(['/betinfo/'+i.fixtureID]);"
+        >
+
+        <div
+          *ngIf="i.fixture.fixture.timestamp | countdown:0:'upcoming' | async as time"
+          class="match-box">
+
+          <div class="x-flex">
+            <div class="league text-deem">{{ i.fixture.league.name|truncateCenter:11 }}</div>
+
+            <span class="time text">
+              <p class="text-end text-primary" style="font-size:10px;">{{ i.fixture.fixture.timestamp | timeFormat }}</p>
+
+              <div class="t-font"><i class="ti ti-clock"></i> {{ time }}</div>
+            </span>
+          </div>
+
+
+          <div class="center-line team">
+
+            <div class="logo left ">
+              <img [src]="i.fixture.teams.home.logo" alt="home logo" />
+              <span class="name">{{ i.fixture.teams.home.name }}</span>
+            </div>
+
+
+              <div class="vs mt-4 text-main">
+                VS
+              </div>
+
+
+              <div class="logo right">
+                <span class="name">{{ i.fixture.teams.away.name }}</span>
+                <img [src]="i.fixture.teams.away.logo" alt="away logo" />
+              </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+  <div *ngIf="!matchService.notStartedMatches.length" class="empty-state">
+    <div class="no-data text-center">
+      <img
+        [src]="matchService.emptyDataUrl"
+        width="60"
+        alt="no data"
+      />
+      <p>No data found.</p>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- <app-menu-bottom></app-menu-bottom> -->

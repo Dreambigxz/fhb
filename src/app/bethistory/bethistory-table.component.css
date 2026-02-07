@@ -1,0 +1,125 @@
+.ticket {
+  border-right: 5px solid #2a3b47;  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: #06131d;
+  color: #fff;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+
+
+.status {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.middle {
+  text-align: center;
+}
+
+.market {
+  font-size: 14px;
+}
+.stake {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.right .caret {
+  transition: 0.2s ease;
+  font-size: 20px;
+}
+.right .caret.open {
+  transform: rotate(180deg);
+}
+
+.details {
+  margin-top: 12px;
+  padding: 10px;
+  /* background: #2a3b47; */
+  border: 1px solid #2a3b47;
+  /* backdrop-filter: blur(9px); */
+  border-radius: 8px;
+  /* opacity: 0.8; */
+}
+
+.league {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+   img {
+    width: 12px;
+    /* height: 22px; */
+  }
+  span{
+    font-size:12px
+  }
+
+}
+.score{
+  color: #d97f02;
+  font-weight: 900;
+}
+.teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.team img {
+  width: 20px;
+  /* height: 28px; */
+}
+
+.vs {
+  font-weight: bold;
+}
+
+.start {
+  margin-top: 8px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.ticket-id {
+    background: linear-gradient(95deg, #d97f02, #06131d);
+    width: 30%;
+    border-top-left-radius: 12px;
+    margin-bottom: 2px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.left .ticket-id {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.green-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    animation: blink 4s infinite;
+  }
+
+  @keyframes blink {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  
