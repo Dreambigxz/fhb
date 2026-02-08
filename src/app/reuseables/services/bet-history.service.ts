@@ -18,7 +18,7 @@ export class BetHistoryService {
   allBets: any[] = []; // keep your fetched bets here
   openBetDisplay:any
   emptyDataUrl = 'assets/images/empty-box.png'
- 
+
   /**
    * Get bet history filtered by status.
    * @param status - could be 'open', 'settled', 'won', 'lost', etc.
@@ -99,7 +99,8 @@ export class BetHistoryService {
   }
 
   sortTickets() {
-    const order = ['open', 'won', 'lost'];
+    const order = ['open'] ;
+    // const order = ['open', 'won', 'lost'];
 
     this.allBets = [...this.allBets]
       // remove closed completely
