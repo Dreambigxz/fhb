@@ -16,7 +16,7 @@
 
 
 
-  <div *ngIf="matchService.notStartedMatches as matches">
+  <div class="page-wrapper" *ngIf="matchService.notStartedMatches as matches">
     <div class="row mt-5">
       <div
         *ngFor="let i of matches; let in = index"
