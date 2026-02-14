@@ -33,6 +33,7 @@ export class MatchService {
   isSlipVisible = false;
 
   emptyDataUrl = 'assets/images/empty-box.png'
+  noMoreData = false
 
   setFixtures(){
 
@@ -72,6 +73,35 @@ export class MatchService {
 
   /** Matches that haven’t started yet */
   async notStarted(matches: any=null, now: Date = new Date()) {
+    !matches?matches=this.fixtures:0;
+
+      let notStartedMatches = [ ];
+     notStartedMatches= matches
+      .filter((m: any) => new Date(m.fixture.fixture.timestamp*1000) > now)
+      .sort(
+        (a: any, b: any) =>
+          a.fixture.fixture.timestamp - b.fixture.fixture.timestamp
+      );
+      if (!notStartedMatches.length) {
+        await this.nextDayData()
+
+        notStartedMatches= this.fixtures
+          .filter((m: any) => new Date(m.fixture.fixture.timestamp*1000) > now)
+          .sort(
+            (a: any, b: any) =>
+              a.fixture.fixture.timestamp - b.fixture.fixture.timestamp
+          );
+      }
+
+      if (!this.notStartedMatches.length) {
+        this.notStartedMatches = notStartedMatches.slice(0, 50)
+
+      }
+        return notStartedMatches
+  }
+
+
+  async notStarted_old(matches: any=null, now: Date = new Date()) {
     !matches?matches=this.fixtures:0;
 
     this.notStartedMatches= matches
@@ -224,9 +254,30 @@ export class MatchService {
    );
  }
 
- toggleSlip() {
+  toggleSlip() {
    this.isSlipVisible = !this.isSlipVisible;
  }
+
+  async loadMore(stop = 50) {
+
+       const total_current_state = this.notStartedMatches.length;
+       const notStarted = await this.notStarted(); // full list
+
+       if (total_current_state < notStarted.length) {
+
+         const nextBatch = notStarted.slice(
+           total_current_state,
+           total_current_state + stop
+         );
+
+         this.notStartedMatches = [
+           ...this.notStartedMatches,
+           ...nextBatch
+         ];
+       }else{
+         this.noMoreData=true
+       }
+    }
 
 
 }

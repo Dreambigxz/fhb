@@ -18,7 +18,6 @@
 
   <div *ngIf="matchService.notStartedMatches as matches">
     <div class="row mt-5">
-
       <div
         *ngFor="let i of matches; let in = index"
         (click)="router.navigate(['/betinfo/'+i.fixtureID]);"
@@ -66,7 +65,10 @@
 
     </div>
 
-
+    <div class="mt-2 mb-9 load-more-btn">
+      <span *ngIf="!matchService.noMoreData" (click)="matchService.loadMore()" class="text-deem">Show more matches <i class="ti ti-caret-down"></i></span>
+      <span *ngIf="matchService.noMoreData"  class="text-deem">No Data <i class="ti ti-database-off"></i></span>
+    </div>
   </div>
 
   <div *ngIf="!matchService.notStartedMatches.length" class="empty-state">
