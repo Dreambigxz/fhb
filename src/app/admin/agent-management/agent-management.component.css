@@ -1,0 +1,29 @@
+.item-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgb(8 19 29);
+  border-radius: 10px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.item-row:last-child {
+  border-bottom: none;
+}
+
+.item-row .label {
+  font-size: 0.995rem;
+  color: #666;
+}
+
+.item-row .value {
+  font-weight: 600;
+  text-align: right;
+  word-break: break-all;
+}
