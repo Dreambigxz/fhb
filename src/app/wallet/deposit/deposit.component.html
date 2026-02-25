@@ -128,7 +128,8 @@
                       Payment Page <i class="ti ti-arrow-right"></i>
                     </button>
                 </span> -->
-                <span *ngIf="storeData.store['local_banks']&&storeData.store['deposit'][0].proof&&storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else paymentProofText" class="color">
+                <span *ngIf="storeData.store['local_banks']&&!storeData.store['deposit'][0].proof&&storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else paymentProofText" class="color">
+                <!-- <span *ngIf="storeData.store['local_banks']&&storeData.store['deposit'][0].proof&&storeData.store['deposit'][0].generator!=='awaiting_deposit_confirmation';else paymentProofText" class="color"> -->
                     Deposit to our verified bank account and {{storeData.store['local_banks'][0].currency==='NGN'?'click on the payment completed button.':'upload the payment receipt.'}}
                     <!-- upload receipt completed to upload your proof. -->
                 </span>
