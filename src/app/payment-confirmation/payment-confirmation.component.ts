@@ -98,11 +98,13 @@ export class PaymentConfirmationComponent {
         this.reqServerData.post('agent-confirmation/',{action:status,id:transaction.id})
         .subscribe((response)=>{
           console.log({response});
+          if (response.status==='success') {
+            this.isLoadingContent=false;
+            transaction.status = status;
+            this.totalAmount-= transaction.amount
+            this.totalAmountDollar -= transaction.init_amount
+          }
 
-          this.isLoadingContent=false;
-          transaction.status = status;
-          this.totalAmount-= transaction.amount
-          this.totalAmountDollar -= transaction.init_amount
 
         })
       },
