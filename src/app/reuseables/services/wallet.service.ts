@@ -48,7 +48,7 @@ export class WalletService {
   localDepositSendersName:any
   activeForm: 'Crypto' | 'Local' = 'Crypto'; // default
 
-  SelectedCrypto : "USD" | "TRON" | "BANK" = "USD"
+  SelectedCrypto : "USD" | "TRON" | "BANK" | "Select" = "Select"
   SelectedBank:any;
 
   selectedMode: PaymentMethod = 'USD';
@@ -106,7 +106,8 @@ export class WalletService {
   initialized_currency:any
 
   // SelectedCrypto:any
-  SelectedCryptoImg="assets/img/card/usdt.svg"
+  // SelectedCryptoImg="assets/img/card/usdt.svg"
+  SelectedCryptoImg=""
 
   cryptos = [
     { value: 'USD', label: 'USDT (TRC20)', img: 'assets/img/card/usdt.svg' },
