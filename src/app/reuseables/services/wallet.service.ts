@@ -194,35 +194,53 @@ export class WalletService {
       });
   }
 
-  unvalidateForm(forms:any){
+  unvalidateForm(forms: any) {
 
-      const form = this.methodView[this.activeForm]?.form;
+  const form = this.methodView[this.activeForm]?.form;
 
-      const amount = form.get('amount')
-      const account_number = form.get('account_number')
-      const pin = form.get("verification_code")
-      const payment_method =  form.get("payment_method")
-      // console.log("unvalidating>>", {account_number,amount,form});
-      amount?.setValidators([Validators.required, Validators.min(1)]);
+  if (!form) return;
 
-      if (!this.storeData.get('wallet')?.saved_add||this.editingAddress) {
-        // console.log('clearing amount validators >><<');
+  const amount = form.get('amount');
+  const account_number = form.get('account_number');
+  const pin = form.get('verification_code');
+  const payment_method = form.get('payment_method');
 
-        amount?.clearValidators();
-        amount?.setErrors(null);
-      }else{
+  const usingSavedAddress = this.storeData.get('wallet')?.saved_add && !this.editingAddress;
 
-        pin.clearValidators();
-        pin?.setErrors(null);
+  if (usingSavedAddress) {
 
-        payment_method.clearValidators();
-        payment_method?.setErrors(null);
+    // Require amount
+    amount?.setValidators([
+      Validators.required,
+      Validators.min(1)
+    ]);
 
+    // Clear other validators
+    pin?.clearValidators();
+    pin?.setErrors(null);
 
-      }
+    payment_method?.clearValidators();
+    payment_method?.setErrors(null);
 
+  } else {
+
+    // Clear amount validation
+    amount?.clearValidators();
+    amount?.setErrors(null);
+
+    // Require pin + payment method
+    pin?.setValidators([Validators.required]);
+    payment_method?.setValidators([Validators.required]);
 
   }
+
+  // Update form controls
+  amount?.updateValueAndValidity();
+  pin?.updateValueAndValidity();
+  payment_method?.updateValueAndValidity();
+
+}
+
 
   /** Initialize the user's payment method from localStorage or default */
   initPaymentMethod(): void {
