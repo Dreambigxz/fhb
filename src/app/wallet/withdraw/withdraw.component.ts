@@ -68,7 +68,7 @@ export class WithdrawComponent {
           }
 
           let getPaymentMethod=this.storeData.get('hasMethod')?.code ?? null
-
+          this.walletService.selectedMethod=getPaymentMethod
           if (getPaymentMethod&&['TRON',"USD"].includes(getPaymentMethod)) {
             this.walletService.fixedMethod(getPaymentMethod)
           }

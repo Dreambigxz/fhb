@@ -61,7 +61,12 @@
               </select>
             </div> -->
 
-            <h4 *ngIf="!storeData.store['wallet']?.saved_add" class="text-center mb-10">Add Withdrawal info </h4>
+            <h4 *ngIf="!storeData.store['wallet']?.saved_add&&!walletService.editingAddress" class="text-center mb-10">Add Withdrawal info </h4>
+            <div *ngIf="walletService.editingAddress" class="">
+              <span (click)="walletService.editingAddress=false; walletService.fixedMethod(walletService.selectedMethod)" style="margin-right:12px" class="text-right"><i class="fa fa-close"></i></span>
+              <h4  class="text-center mb-10">Edit Withdrawal info </h4>
+
+            </div>
 
             <div *ngIf="walletService.selectedMode === 'BANK';else selectCryptoForm" class="mb-3">
               <!-- <label>Select Chain</label> -->
@@ -116,7 +121,7 @@
 
             <div *ngIf="walletService.selectedMode==='BANK'&& walletService.selectedCurrency||['USD','TRON'].includes(walletService.selectedMode)" class="withdraw-info">
 
-              <div *ngIf="storeData.store['wallet']?.saved_add"  class="input-container">
+              <div *ngIf="storeData.store['wallet']?.saved_add&&!walletService.editingAddress"  class="input-container">
                 <label>Amount</label>
                 <input
                   type="number"
@@ -125,12 +130,13 @@
                   [min]="walletService.minimumPayment"
                   class="n11-bg mb-3"
                   formControlName="amount"
+
                 />
               </div>
 
-              <div *ngIf="storeData.store['wallet']?.saved_add; else NosavedAdd" class="mb-3">
+              <div *ngIf="storeData.store['wallet']?.saved_add&&!walletService.editingAddress; else NosavedAdd" class="mb-3">
                 <label>Select saved withdrawal</label>
-
+                <span style="margin-right:12px;" class="text-right" (click)="walletService.editingAddress=true; walletService.fixedMethod(walletService.selectedMethod)">Edit <i class="fa fa-edit"></i></span>
                 <select
                   class="n11-bg"
                   formControlName="saved_method_id"
@@ -194,7 +200,7 @@
 
 
 
-              <div *ngIf="!storeData.store['wallet']?.saved_add"  class="input-container otp-container">
+              <div *ngIf="!storeData.store['wallet']?.saved_add||walletService.editingAddress"  class="input-container otp-container">
                   <label>Pin</label>
 
                   <div class="otp-input-wrapper otp-row">

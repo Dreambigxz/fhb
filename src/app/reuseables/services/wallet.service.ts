@@ -118,6 +118,9 @@ export class WalletService {
   sendSendersName=false
   init_payment_method:any
 
+  editingAddress=false
+  selectedMethod:any
+
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
@@ -146,8 +149,11 @@ export class WalletService {
         );
 
         this.onCryptoSelect(paymentMethod)
+        this.unvalidateForm(this.methodView.Crypto)
 
-
+      }
+      else{
+        this.unvalidateForm(this.methodView.Local)
       }
   }
 
@@ -163,8 +169,6 @@ export class WalletService {
   }
 
   selectLocal(local:any,form:any){
-
-    console.log({local});
 
     // this.onCryptoSelect(crypto.value);
     this.SelectedBank=local.name
@@ -197,11 +201,11 @@ export class WalletService {
       const amount = form.get('amount')
       const account_number = form.get('account_number')
       const pin = form.get("verification_code")
-
+      const payment_method =  form.get("payment_method")
       // console.log("unvalidating>>", {account_number,amount,form});
       amount?.setValidators([Validators.required, Validators.min(1)]);
 
-      if (!this.storeData.get('wallet')?.saved_add) {
+      if (!this.storeData.get('wallet')?.saved_add||this.editingAddress) {
         // console.log('clearing amount validators >><<');
 
         amount?.clearValidators();
@@ -210,7 +214,11 @@ export class WalletService {
 
         pin.clearValidators();
         pin?.setErrors(null);
-        // amount.clearValidators()
+
+        payment_method.clearValidators();
+        payment_method?.setErrors(null);
+
+
       }
 
 
@@ -323,6 +331,8 @@ export class WalletService {
     } catch (e) {}
 
     this.formHandler.submitForm(form, processor, 'wallet/?showSpinner', true,  (res) => {
+
+      this.editingAddress=false
       if (res.payment_link) {
         //open a new tab url
         window.open(res.payment_link, '_blank'); // opens in a new tab
