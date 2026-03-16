@@ -165,6 +165,7 @@ export class WalletService {
     this.dropdownOpen = false;
     form.patchValue({ payment_method: crypto.value });
     this.init_payment_method = crypto.value
+    this.selectedMode = crypto.value
 
     this.unvalidateForm(form)
   }
@@ -197,48 +198,48 @@ export class WalletService {
 
   unvalidateForm(forms: any) {
 
-  const form = this.methodView[this.activeForm]?.form;
+    const form = this.methodView[this.activeForm]?.form;
 
-  if (!form) return;
+    if (!form) return;
 
-  const amount = form.get('amount');
-  const account_number = form.get('account_number');
-  const pin = form.get('verification_code');
-  const payment_method = form.get('payment_method');
+    const amount = form.get('amount');
+    const account_number = form.get('account_number');
+    const pin = form.get('verification_code');
+    const payment_method = form.get('payment_method');
 
-  const usingSavedAddress = this.storeData.get('wallet')?.saved_add && !this.editingAddress;
+    const usingSavedAddress = this.storeData.get('wallet')?.saved_add && !this.editingAddress;
 
-  if (usingSavedAddress) {
+    if (usingSavedAddress) {
 
-    // Require amount
-    amount?.setValidators([
-      Validators.required,
-      Validators.min(1)
-    ]);
+      // Require amount
+      amount?.setValidators([
+        Validators.required,
+        Validators.min(1)
+      ]);
 
-    // Clear other validators
-    pin?.clearValidators();
-    pin?.setErrors(null);
+      // Clear other validators
+      pin?.clearValidators();
+      pin?.setErrors(null);
 
-    payment_method?.clearValidators();
-    payment_method?.setErrors(null);
+      payment_method?.clearValidators();
+      payment_method?.setErrors(null);
 
-  } else {
+    } else {
 
-    // Clear amount validation
-    amount?.clearValidators();
-    amount?.setErrors(null);
+      // Clear amount validation
+      amount?.clearValidators();
+      amount?.setErrors(null);
 
-    // Require pin + payment method
-    pin?.setValidators([Validators.required]);
-    payment_method?.setValidators([Validators.required]);
+      // Require pin + payment method
+      pin?.setValidators([Validators.required]);
+      payment_method?.setValidators([Validators.required]);
 
-  }
+    }
 
-  // Update form controls
-  amount?.updateValueAndValidity();
-  pin?.updateValueAndValidity();
-  payment_method?.updateValueAndValidity();
+    // Update form controls
+    amount?.updateValueAndValidity();
+    pin?.updateValueAndValidity();
+    payment_method?.updateValueAndValidity();
 
 }
 
