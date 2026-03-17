@@ -48,7 +48,7 @@ export class WalletService {
   localDepositSendersName:any
   activeForm: 'Crypto' | 'Local' = 'Crypto'; // default
 
-  SelectedCrypto : "USD" | "TRON" | "BANK" = "USD"
+  SelectedCrypto : "USD" | "TRON" | "BANK" | "Select" = "Select"
   SelectedBank:any;
 
   selectedMode: PaymentMethod = 'USD';

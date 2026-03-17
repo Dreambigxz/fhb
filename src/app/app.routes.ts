@@ -20,7 +20,7 @@ import { ResetComponent} from "./auth/reset/reset.component";
 import {CreditAgentComponent} from './credit-agent/credit-agent.component'
 import {PaymentConfirmationComponent} from './payment-confirmation/payment-confirmation.component'
 import { AgentManagementComponent } from "./admin/agent-management/agent-management.component";
-
+import { TermsCondComponent } from "./terms-cond/terms-cond.component";
 import { authGuard } from './reuseables/auth/auth.guard';
 
 export const routes: Routes = [
@@ -142,6 +142,11 @@ export const routes: Routes = [
       path: 'reset-password',
       component: ResetComponent,
       title: 'Reset',
+    },
+    {
+      path: 'terms-conditions',
+      component: TermsCondComponent,
+      title: 'Terms&Conditions',
     },
 
 ];

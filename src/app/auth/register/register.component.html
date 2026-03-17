@@ -52,6 +52,11 @@
                                                   <i *ngIf="!authService.showPassword" class="fa fa-eye"></i>
                                                 </span>
                                         </div>
+                                        <label>
+                                          <input type="checkbox"  />
+                                            I agree to the <span (click)="authService.router.navigate(['/terms-conditions'])">Terms & Conditions</span>
+                                        </label>
+
                                         <button [class.inactive-btn]="!form.valid" class="cmn-btn px-5 py-3 mb-6 w-100" type="submit">Register</button>
                                     </form>
                                 </div>

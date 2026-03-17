@@ -20,7 +20,8 @@ export class RegisterComponent {
 
 
   authService = inject(AuthService)
-
+  acceptedTerms = false
+  
   async ngOnInit()   {
     this.authService.setRefCode()
   }
