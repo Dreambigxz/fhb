@@ -158,6 +158,39 @@ export class AuthService {
       form.patchValue({ RefCode: this.RefCode });
      }
     this.formHandler.submitForm(form,processor, processor+'/?showSpinner',  true, (res) => {
+      if (res.status === 'success') {
+        this.login(res.main.token, 'login').subscribe(() => {
+
+          const redirectUrl = localStorage['redirectUrl'] || '/';
+
+          try {
+
+            const [path, query] = redirectUrl.split('?');
+
+            if (query) {
+              const queryParams = Object.fromEntries(new URLSearchParams(query));
+              this.router.navigate([path], { queryParams });
+            } else {
+              this.router.navigate([path]);
+            }
+
+          } catch (error) {
+            this.router.navigate(['/']);
+          }
+
+          delete localStorage['redirectUrl'];
+        });
+      }
+    });
+
+  }
+
+  onSubmitOLD(form:any,processor:any){
+
+    if (this.RefCode) {
+      form.patchValue({ RefCode: this.RefCode });
+     }
+    this.formHandler.submitForm(form,processor, processor+'/?showSpinner',  true, (res) => {
       if (res.status==='success') {
         // login user
         this.login(res.main.token,'login').subscribe(() => {
