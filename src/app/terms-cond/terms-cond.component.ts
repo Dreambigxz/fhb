@@ -9,6 +9,6 @@ import { CommonModule } from '@angular/common';
 })
 export class TermsCondComponent {
 
-  today = "2026/01/19"
+  today = "2026/02/19"
 
 }
