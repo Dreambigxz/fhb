@@ -44,14 +44,30 @@ export const PostHttpInterceptor: HttpInterceptorFn = (req, next) => {
     loaderService.setLoadingButton(activeBtn);
   }
 
+  const is_banned = (mess:any)=>{
+    console.log("is_banned", mess);
+
+    dialog.open(StatusDialogComponent, {
+      data: { title: 'Account Restricted', message: mess.message, status: 'info' }
+    });
+
+  }
+
   return next(req).pipe(
     tap({
       next: (event) => {
         if (event instanceof HttpResponse) {
           let body;
           if (event.body && typeof event.body === 'object' && !Array.isArray(event.body)) {
-            body = event.body as { message?: string; status?: string; main?: Object; next_page?: any };
-            body.message ? toast.show(body) : 0;
+            body = event.body as { message?: string; status?: string; main?: Object; next_page?: any, is_banned:any };
+            if (body.message) {
+              if (body.is_banned) {
+                is_banned(body)
+              }else{
+                toast.show(body)
+              }
+            }
+             // ? !body.main?.is_banned?toast.show(body):  : 0;
             body.main ? storeData.setMultiple(body.main) : 0;
             if (body.next_page) {
               const next_page_ = body.next_page.url;

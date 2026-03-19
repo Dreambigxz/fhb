@@ -3,7 +3,9 @@
     <mat-icon [ngClass]="data.status">{{ data.status === 'success' ? 'check_circle' : 'error' }}</mat-icon>
   </div>
   <h2 class="mb-5">{{ data.title }}</h2>
-  <p [ngClass]="data.status">{{ data.message }}</p>
+  <!-- <p [ngClass]="data.status">{{ data.message }}</p> -->
+  <p [ngClass]="data.status" [innerHTML]="data.message"></p>
+
 </div>
 
 <div mat-dialog-actions align="end">
