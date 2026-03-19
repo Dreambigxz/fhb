@@ -85,7 +85,7 @@ export const PostHttpInterceptor: HttpInterceptorFn = (req, next) => {
           authService.logout(true);
         } else {
           dialog.open(StatusDialogComponent, {
-            data: { title: 'Error', message: 'Request failed!', status: 'error' }
+            data: { title: 'Error', message: 'Network failed!', status: 'error', button:'reload' }
           });
         }
       }

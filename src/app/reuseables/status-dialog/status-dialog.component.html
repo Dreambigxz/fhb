@@ -9,5 +9,5 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-flat-button mat-button mat-dialog-close>OK</button>
+  <button (click)="reload(data.button)" mat-flat-button mat-button mat-dialog-close>{{data.button}}</button>
 </div>

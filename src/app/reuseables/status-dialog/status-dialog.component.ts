@@ -19,7 +19,14 @@ export class StatusDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
     title: string;
     message: string;
-    status: 'success' | 'error';
+    status: 'success' | 'error',
+    button:'Ok'
   }) {}
+
+  reload(btn:string='ok'){
+      if (btn==='reload') {
+        window.location.reload()
+      }
+  }
 
 }
